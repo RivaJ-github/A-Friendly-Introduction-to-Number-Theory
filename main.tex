@@ -1,0 +1,17 @@
+\documentclass{ctexbook}
+\usepackage{amsmath}
+
+% define exercise
+\newcounter{exerciseno}
+\counterwithin{figure}{chapter}
+\def\exercise{\vskip 2ex\stepcounter{exerciseno}{\bf \thechapter.\theexerciseno}\quad\relax}
+
+% define proof
+\def\proof{{\bf 证明：}\quad\relax}
+
+% no indent
+\setlength{\parindent}{0pt}
+
+\begin{document}
+\input chapter1.tex
+\end{document}
