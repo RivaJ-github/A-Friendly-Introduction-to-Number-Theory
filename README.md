@@ -2,7 +2,7 @@
 数论概论第四版习题答案
 
 ## Build
-需安装XeLatex、Gnu make
+需安装XeLaTeX、Gnu make
 
 ### 构建
 make
