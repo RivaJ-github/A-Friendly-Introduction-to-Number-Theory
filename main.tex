@@ -2,16 +2,33 @@
 \usepackage{amsmath}
 
 % define exercise
-\newcounter{exerciseno}
-\counterwithin{figure}{chapter}
-\def\exercise{\vskip 2ex\stepcounter{exerciseno}{\bf \thechapter.\theexerciseno}\quad\relax}
+\newcounter{exercise}
+\counterwithin{exercise}{chapter}
+\def\exercise{\vskip 2ex\stepcounter{exercise}{\bf \theexercise}\quad\relax}
 
 % define proof
+\newcounter{theoremno}
+\counterwithin{theoremno}{chapter}
 \def\proof{{\bf 证明：}\quad\relax}
+\newenvironment{theorem}[1][]{% 定义 theorem 环境
+    \stepcounter{theoremno}% 增加计数器
+    {
+        \bf 定理\thetheoremno%
+        \if\relax\detokenize{#1}\relax% 检查是否有可选参数
+        \else%
+            \ (#1)% 输出可选参数
+        \fi%
+        \quad\ignorespaces% 开始新段落并忽略后续空格
+    }
+    \itshape
+}{%
+    \par% 结束环境前换行
+}
 
 % no indent
 \setlength{\parindent}{0pt}
 
 \begin{document}
 \input chapter1.tex
+\input chapter2.tex
 \end{document}
