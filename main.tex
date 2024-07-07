@@ -1,7 +1,14 @@
-\documentclass{ctexbook}
+\documentclass[openany]{ctexbook}
+\usepackage{geometry}
+\geometry{
+  a4paper,         % 使用 A4 纸张大小
+  margin=2.5cm     % 设置页边距为 2.5 厘米
+}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsfonts}
+\usepackage{diagbox}
+\usepackage[table]{xcolor} % 加载 xcolor 包，并启用 table 选项
 
 % define exercise
 \newcounter{exercise}
@@ -33,4 +40,5 @@
 \begin{document}
 \input chapter1.tex
 \input chapter2.tex
+\input chapter3.tex
 \end{document}
