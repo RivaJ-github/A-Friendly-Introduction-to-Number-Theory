@@ -9,6 +9,7 @@
 \usepackage{amsfonts}
 \usepackage{diagbox}
 \usepackage[table]{xcolor} % 加载 xcolor 包，并启用 table 选项
+\usepackage{listings}
 
 % define exercise
 \newcounter{exercise}
@@ -38,8 +39,10 @@
 \setlength{\parindent}{0pt}
 
 \begin{document}
+\lstset{language=Python}
 \input chapter1.tex
 \input chapter2.tex
 \input chapter3.tex
 \input chapter4.tex
+\input chapter5.tex
 \end{document}

@@ -1,9 +1,8 @@
+'''
+两数是否互素
+'''
 def isPrime(a, b):
-    if (b == 0):
-        return False
-    if (b == 1):
-        return True
-    return isPrime(b, a%b)
+    return gcd(a, b) == 1
 
 '''
 分解质因素：
@@ -22,8 +21,25 @@ def factoringPrimeFactors(n):
         p += 1
     return res
 
-        
+'''
+最大公约数(欧几里得算法)
+'''
+def gcd(a, b):
+    if (b == 0):
+        return a
+    return gcd(b, a%b)   
+
+def LCM(m, n):
+    return m // gcd(m, n) * n 
 
 if __name__ == '__main__':
-    # print(isPrime(165, 13))
-    print(factoringPrimeFactors(12))
+    # print(isPrime(316258250, 1160718174))
+    # print(factoringPrimeFactors(12))
+    # print(gcd(0, 0))
+    def exe_5_4_a(m, n):
+        print(f'LCM({m}, {n}) = {LCM(m, n)}')
+    # exe_5_4_a(8, 12)
+    # exe_5_4_a(20, 30)
+    # exe_5_4_a(51, 68)
+    # exe_5_4_a(23, 18)
+    exe_5_4_a(301337, 307829)
