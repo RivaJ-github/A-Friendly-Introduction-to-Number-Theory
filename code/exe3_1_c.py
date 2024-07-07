@@ -1,5 +1,3 @@
-from tools.isPrime import isPrime
-
 def getTable(target_length = 10):
     res = []
     for u in range(2, 11):

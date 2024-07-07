@@ -1,4 +1,4 @@
-from tools.isPrime import isPrime
+from tools.prime import isPrime
 
 def findPrimitivePythagoreanTripleWithSimpleC(target = 3, num = 1):
     t = 1

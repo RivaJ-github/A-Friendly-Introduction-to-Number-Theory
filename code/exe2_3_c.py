@@ -1,4 +1,4 @@
-from tools.isPrime import isPrime
+from tools.prime import isPrime
 
 def getPrimitivePythagoreanTriple(target_length = 10):
     t = 1
