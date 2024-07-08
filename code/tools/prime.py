@@ -58,4 +58,4 @@ if __name__ == '__main__':
     # exe_5_4_a(51, 68)
     # exe_5_4_a(23, 18)
     # exe_5_4_a(301337, 307829)
-    print(gcdWithXY(301337, 307829))
+    print(gcdWithXY(37, 47))

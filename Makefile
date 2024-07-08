@@ -7,7 +7,7 @@ OUTPUT_DIR=dist
 
 all:
 ifdef OUTPUT_DIR
-	mkdir -p $(OUTPUT_DIR)
+	if not exist "$(OUTPUT_DIR)" mkdir "$(OUTPUT_DIR)"
 	$(LATEX) -output-directory=$(OUTPUT_DIR) $(MAIN)
 else
 	OUTPUT_DIR=./
