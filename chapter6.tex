@@ -1,0 +1,50 @@
+\chapter{线性方程和最大公因数}
+\begin{theorem}[线性方程定理]
+设$a$与$b$是非零整数，$g=\gcd(a,b)$。方程
+\[ax+by=g\]
+总是有一个整数解$(x_1, y_1)$，它可由欧几里得算法得到。则方程的每一个解可由
+\[\left(x_1+k\cdot\frac{b}{g}, y_1-k\cdot\frac{a}{g}\right)\]
+得到，其中$k$是任意整数。
+\end{theorem}
+%
+\exercise a）$12345\cdot 11 - 67890\cdot 2=\gcd(12345, 67890) = 15$\par
+b）$-54321\cdot 1645 + 9876\cdot 9048 = \gcd(54321, 9876) = 3$
+%
+\exercise 
+a）$105\cdot(-53)+121\cdot46=1$。一般解为$(-53+121k, 46-105k)$\par
+b）$12345\cdot11+67890\cdot(-2)=15$。一般解为$(11+4526k, -2-823k)$\par
+c）$54321\cdot(-1645)+9876\cdot9048=3$。一般解为$(-1645+3292k, 9048-18107k)$
+%
+\exercise 
+a）{\bf 提示：}每次迭代后$w$是新产生的余数，$g$上一次迭代产生的余数。$v$是形如$r_i = ax + by$中的$x$。而$x$则记录的是$r_{i-1} = ax + by$中的$x$。\par
+b）python实现如下：
+\begin{lstlisting}
+def gcdWithXY(a, b):
+    x, g, v, w = 1, a, 0, b
+    while (w != 0):
+        t = g % w
+        q = g // w
+        s = x - q * v
+        x, g = v, w
+        v, w = s, t
+    return (g, x, (g - a * x) // b)
+\end{lstlisting}
+c）运行code/exe6\_3.py。
+\begin{gather*}
+\gcd(19789, 23548) = 7\quad (x,y)=(1303,-1095) \\
+\gcd(31875, 8387) = 1\quad (x,y)=(-381,1448) \\
+\gcd(22241739, 19848039) = 237\quad (x,y)=(-8980,10063)
+\end{gather*}
+d）添加特殊处理：
+\begin{lstlisting}
+    if (b == 0):
+        return (a, 1, 0)
+\end{lstlisting}
+e）在返回前添加校验：
+\begin{lstlisting}
+    while (x <= 0):
+        x += b
+\end{lstlisting}
+
+%
+\exercise 
