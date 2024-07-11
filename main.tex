@@ -20,10 +20,16 @@
 \newcounter{theoremno}
 \counterwithin{theoremno}{chapter}
 \def\proof{{\bf 证明：}\quad\relax}
-\newenvironment{theorem}[1][]{% 定义 theorem 环境
+\newenvironment{theorem}[2][]{% 定义 theorem 环境
     \stepcounter{theoremno}% 增加计数器
     {
-        \bf 定理\thetheoremno%
+        \bf
+        \ifx l#2
+            引理
+        \else
+            定理
+        \fi
+        \thetheoremno%
         \if\relax\detokenize{#1}\relax% 检查是否有可选参数
         \else%
             \ (#1)% 输出可选参数
@@ -46,4 +52,5 @@
 \input chapter4.tex
 \input chapter5.tex
 \input chapter6.tex
+\input chapter7.tex
 \end{document}

@@ -1,3 +1,5 @@
+OS := $(shell uname)
+
 MAIN=main
 LATEX=xelatex
 RM=rm -f
@@ -7,8 +9,14 @@ OUTPUT_DIR=dist
 
 all:
 ifdef OUTPUT_DIR
-	if not exist "$(OUTPUT_DIR)" mkdir "$(OUTPUT_DIR)"
+
+ifeq ($(OS), Windows)
+	shell if not exist "$(OUTPUT_DIR)" mkdir $(OUTPUT_DIR)
+else
+	mkdir -p $(OUTPUT_DIR)
+endif
 	$(LATEX) -output-directory=$(OUTPUT_DIR) $(MAIN)
+
 else
 	OUTPUT_DIR=./
 endif
