@@ -58,4 +58,16 @@ if __name__ == '__main__':
     # exe_5_4_a(51, 68)
     # exe_5_4_a(23, 18)
     # exe_5_4_a(301337, 307829)
-    print(gcdWithXY(37, 47))
+    # print(gcdWithXY(37, 47))
+    res = [2]
+    n = 3
+    while len(res) < 100:
+        flag = True
+        for p in res:
+            if not isPrime(n, p):
+                flag = False
+                break
+        if flag:
+            res.append(n)
+        n+=2
+    print(res)

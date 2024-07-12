@@ -1,88 +1,61 @@
 \chapter{因数分解与算术基本定理}
-\begin{theorem}[线性方程定理]{l}
-设$a$与$b$是非零整数，$g=\gcd(a,b)$。方程
-\[ax+by=g\]
-总是有一个整数解$(x_1, y_1)$，它可由欧几里得算法得到。则方程的每一个解可由
-\[\left(x_1+k\cdot\frac{b}{g}, y_1-k\cdot\frac{a}{g}\right)\]
-得到，其中$k$是任意整数。
+\begin{lemma}
+令$p$是素数，假设$p$整除乘积$ab$，则$p$整除$a$或$p$整除$b$（或者$p$既整除$a$也整除$b$）。
+\end{lemma}
+\begin{theorem}[素数整除性质]
+假设素数$p$整除乘积$a_1a_2\cdots a_r$，则$p$整除$a_1$，$a_2$，$\cdots$，$a_r$中至少一个因数。
+\end{theorem}
+\begin{theorem}[素数基本定理]
+每个整数$n\ge2$可唯一分解成素数乘积
+\[n=p_1p_2\cdots p_r\]
 \end{theorem}
 %
-\exercise a）$12345\cdot 11 - 67890\cdot 2=\gcd(12345, 67890) = 15$\par
-b）$-54321\cdot 1645 + 9876\cdot 9048 = \gcd(54321, 9876) = 3$
+\exercise \proof $\gcd(a,b)=1$意味着方程$ax+by=1$有整数解。方程两边乘以$c$得到$acx+bcy=c$。显然$a$整除$acx$，又已知$a$整除$bc$。因此$a$整除$c$。
 %
-\exercise 
-a）$105\cdot(-53)+121\cdot46=1$。一般解为$(-53+121k, 46-105k)$\par
-b）$12345\cdot11+67890\cdot(-2)=15$。一般解为$(11+4526k, -2-823k)$\par
-c）$54321\cdot(-1645)+9876\cdot9048=3$。一般解为$(-1645+3292k, 9048-18107k)$
+\exercise \proof 已知$a$，$b$整除$c$，因此存在整数$a'$，$b'$是的$c=aa'=bb'$。又已知$\gcd(a,b)=1$，因此方程$ax+by=1$有整数解。两边乘以$a'$得到$aa'x+a'by=cx+a'by=bb'x+a'by=a'$。将其代入$c=aa'$得到
+\[c=aa'=a(bb'x+a'by)=ab(b'x+a'y)\]
+于是$ab$整除$c$，证毕。
 %
-\exercise 
-a）{\bf 提示：}每次迭代后$w$是新产生的余数，$g$上一次迭代产生的余数。$v$是形如$r_i = ax + by$中的$x$。而$x$则记录的是$r_{i-1} = ax + by$中的$x$。\par
-b）python实现如下：
-\begin{lstlisting}
-def gcdWithXY(a, b):
-    x, g, v, w = 1, a, 0, b
-    while (w != 0):
-        t = g % w
-        q = g // w
-        s = x - q * v
-        x, g = v, w
-        v, w = s, t
-    return (g, x, (g - a * x) // b)
-\end{lstlisting}
-c）运行code/exe6\_3.py。
-\begin{gather*}
-\gcd(19789, 23548) = 7\quad (x,y)=(1303,-1095) \\
-\gcd(31875, 8387) = 1\quad (x,y)=(-381,1448) \\
-\gcd(22241739, 19848039) = 237\quad (x,y)=(-8980,10063)
-\end{gather*}
-d）添加特殊处理：
-\begin{lstlisting}
-    if (b == 0):
-        return (a, 1, 0)
-\end{lstlisting}
-e）在返回前添加校验：
-\begin{lstlisting}
-    while (x <= 0):
-        x += b
-\end{lstlisting}
+\exercise \proof 首先某个素数$p$整除$st$，$\frac{s^2-t^2}{2}$，$\frac{s^2+t^2}{2}$中的任意两个，则它同时整除这三个数。因为
+\[(st)^2+\left(\frac{s^2-t^2}{2}\right)^2+\left(\frac{s^2+t^2}{2}\right)^2\]
+于是$p$整除$\frac{s^2+t^2}{2} + \frac{s^2-t^2}{2} = s^2$，根据素数整除性质，$p$整除$s$。类似的，由于$p$整除$\frac{s^2+t^2}{2} - \frac{s^2-t^2}{2} = t^2$，得到$p$整除$t$。这与已知$\gcd(s,t)=1$矛盾。因此不存在素数$p$能同时整除$st$，$\frac{s^2-t^2}{2}$，$\frac{s^2+t^2}{2}$中的任意两个数。因此这三个数两两互素。
 %
-\exercise a）首先解$6X+15Y=\gcd(6, 15)=3$，其中一个解是$X=3$，$Y=-1$。
-接下来解$3W+20Z=1$。其中一个解是$W=7$，$Z=-1$。即方程
-\[(6X+15Y)W + 20Z = 1\]
-有解$X=3$，$Y=-1$，$W=7$，$Z=-1$。将方程变形为：
-\[6XW+15YW + 20Z = 1\]
-因此，原方程有一个解为$x=XW=21$，$y=YW=-7$，$z = Z=-1$。\par
-b）$ax+by+cz=1$有整数解，当且仅当$a$，$b$，$c$只有一个公因子1。\par
-\proof 必要性：假设$a$，$b$，$c$有公因子$d$，则$d$整除$ax+by+cz$，同时$d$整除1，所以$d$只能是1。\par
-充分性：如果$a$，$b$，$c$没有公因子，可通过如下步骤得到一个解。首先解$aX+bY=g=\gcd(a,b)$。因为$a$，$b$，$c$没有公因子，所以$g$和$c$没有公因子。因此可以找到$gW+cZ=1$的解。于是
-\[(aX+bY)W +cZ=1\]
-最终我们得到解$x=XW$，$y=YW$，$z=Z$\par
-c）首先，解$155X+341Y=\gcd(155, 341)=31$，得到一个较小的解$X=-2$，$Y=1$。接下来解$31W+385Z=1$。得到一个解$W=-149$，$Z=12$。于是得到原式的一个解$x=298$，$y=-149$，$z=12$。
+\exercise 略，数学归纳法的练习
 %
-\exercise \proof 已知$ax+by=\gcd(a,b)=1$比有整数解，记为$x=X$，$y=Y$，即$aX+bY=1$，两边乘以$c$得到$acX+bcY=c$。因此原式有解$x=cX$，$y=cY$\par
-解$37x+47y=\gcd(37, 47)=1$，得到$x=14$，$y=-11$，所以$(x,y)=(14*103, -11*103)=(1442, -1133)$是原式的解。于是$(1442 - 47k, -1133+37k)$也是原式的解。令$k=31$，得到一个较小的解$(-15, 14)$
-%
-\exercise a）（原书印刷错误了）解释为什么方程$3x+5y=4$没有整数解$x\ge0$与$y\ge 0$\par
-\proof 如果$y\ge1$则$3x+5y\ge5$原式无解。所以$y=0$，但此时$3x+5y=3x$，$3x=4$没有整数解。综上，原式无整数解。\par
-b）不可能出现的数值是$\{1, 2, 4, 7\}$\par
-\proof 首先8到15是可行的：$8=3\cdot1+5\cdot1$，$9=3\cdot3+5\cdot1$，$10=3\cdot0+5\cdot2$，$11=3\cdot2+5\cdot1$，$12=3\cdot4+5\cdot0$，$13=3\cdot1+5\cdot2$，$14=3\cdot3+5\cdot1$，$15=3\cdot5+5\cdot0$。对任意$c\ge 16$，都可以写成$c=8d+e$，其中$8\le e<16$。已经证明$e=3u+5v$，所以$c=(3+d)u+(5+d)v$。因此，不可能出现的数值小于8，按a）中的方法枚举即可。\par
-c）(\romannumeral1)11；(\romannumeral2)23；(\romannumeral3)29\par
-d）如果$\gcd(a, b)=1$，则最大的不能被表示成$ax+by$形式的值是$ab-a-b$。\par
-e）严格的证明过程超出了当前的能力，下面给出两个证明的片段：\par
-\proof{\bf 不能表示$ab - a - b$}\par
-假设$ax+by=ab-a-b$，则$a(x-b+1)=b(-y-1)$。因为$\gcd(a,b)=1$，所以$a$整除$-y-1$。因此对于某个$k\ge1$，$y=ka-1$（因为$y\ge0$，$k$必须$\ge1$）。类似地，因为$b(y-a+1)=a(-x-1)$，因此对于某个$j\ge1$，$x=jb-1$。于是
+\exercise a）偶数$n$是$\mathbb{E}$-素数，当且仅当$n/2$是奇数。\par
+\proof 必要性：如果$n/2$是偶数，那么$n$能被2$\mathbb{E}$-整除，将不是$\mathbb{E}$-素数。\par
+充分性：如果$n/2$是奇数，那么对于任意能整除$n$的偶数$m$，$n/m$必是奇数。因此不存在能$\mathbb{E}$-整除$n$的数。即$n$是$\mathbb{E}$-素数。\par
+b）如果$n$是$\mathbb{E}$-素数，则得证。否则，$n=n_1n_2$，将$n_1$，$n_2$中的$\mathbb{E}$-素数放在一边。否则分解他们。这个过程必定可以终止，因为每次分解的因子必定更小。因此，我们总能将$n$写成$\mathbb{E}$-素数的乘积。\par
+c）有两种不同分解法分解成$\mathbb{E}$-素数乘积的最小的数是36，$36=2\times18=6\times6$。\par
+能写成$4p^2q$（其中$p$，$q$是不同的奇素数）的数有三种不同分解法，$2\cdot2p^2q$，$2p\cdot 2pq$，$2p^2\cdot 2q$。因此最小的数就是$4\times3^2\times5=180$。\par
+能写成$4pqr$（其中$p$，$q$，$r$是不同的奇素数）的数有四种不同分解法，$2\cdot 2pqr$，$2p\cdot 2qr$，$2q\cdot 2pr$，$2r\cdot 2pq$，其中最小的数是$4\times3\times5\times7=420$。另一种有四种不同分解法的形式是$4p^3r$，其中最小的是$4\times3^3\times5=540$。然而还有一个形式$8p^2q$，其分解方法为$2\cdot 2\cdot 2p^2q$，$2\cdot 2p\cdot 2pq$，$2\cdot 2p^2\cdot 2q$，$2p\cdot 2p\cdot 2q$，其中最小的是$8\times3^2\times5=360$\par
+d）有三种情况会产生仅有一种分解法的偶数。1、它本身就是$\mathbb{E}$-素数；2、它没有奇因子；3、它仅有一个奇因子。总结如下，一个偶数$n$仅有一种$\mathbb{E}$-素数分解法，当且仅当$n$满足如下形式之一：
 \begin{align*}
-ab-a-b &= ax+by \\
-&= ax+by \\
-&= a(jb-1)+b(ka-1) \\ 
-&= (j+k)ab - a - b \\
-\ge 2ab-a-b
+n&=2k  \text{\quad $k$是奇数} \\
+n&=2^r \text{\quad $r\ge 1$} \\
+n&=2^rp \text{\quad $p$为素数且$r\ge2$}
 \end{align*}
-由此得到$0\ge ab$，这与题设矛盾。因此$ax+by=ab-a-b$没有满足$x\ge0$和$y\ge0$的整数解。\par
-\proof{\bf 能表示$ab - a - b + 1$}\par
-首先$au-bv=1$有整数解，$(u-kb, v+ka)$，我们可以找到一个解使得，$1\le u<b$。这意味着$v=(au-1)/b<au/b<a$。于是得到原式的一个解
-\[ab-a-b+1=ab-a-b+au-bv=a(u-1)+b(a-v-1)\]
-因为$u\ge1$，$v\le a$，所以$ax+by=ab-a-b+1$存在$x\ge0$，$y\ge0$的整数解。\par
-f）对于三项及以上的变量，问题将变得非常苦难。code/exe\_6\_6.py给出了1000以内不能表示为$6x+10y+15z$的整数。
-\[\{1, 2, 3, 4, 5, 7, 8, 9, 11, 13, 14, 17, 19, 23, 29\}\]
-因此猜测最大符合条件的整数是29。
+%
+\exercise a）5，9，13，17，21，29\par
+b）如果$p$和$q$是模4余3的素数，则$pq$是$\mathbb{M}$-素数。因为此时$pq\equiv 1\pmod 4$，但$pq$无法被分解为两个模4余1的数的乘积。据此，我们可以构造形如$p^2q^2$的$\mathbb{M}$-素数。如$441=3^2\cdot7^2=9\cdot49=21\cdot21$。也可以构造形如$p^2qr$的$\mathbb{M}$-素数。如$693=3^2\cdot7\cdot11=9\cdot77=21\cdot33$
+%
+\exercise 代码详见code/exe\_7\_7.py。其中方法a）运行很慢；优化后的方法b）运行速度提升近1000倍。其中提前准备素数列表提升了近2倍。利用$m$不能倍2与$\sqrt{m}$见的任何数整除时$m$必为素数的事实提升了近500倍。\par
+\begin{tabular}{ll}
+    \centering
+    $1000000=2^{6} \cdot 5^{6}$ & $1000016=2^{6} \cdot 5^{6}$ \\
+    $1000001=101 \cdot 9901$ & $1000017=101 \cdot 9901$ \\
+    $1000002=2 \cdot 3 \cdot 166667$ & $1000018=2 \cdot 3 \cdot 166667$ \\
+    $1000003=1000003$ & $1000019=1000003$ \\
+    $1000004=2^{2} \cdot 53^{2} \cdot 89$ & $1000020=2^{2} \cdot 53^{2} \cdot 89$ \\
+    $1000005=3 \cdot 5 \cdot 163 \cdot 409$ & $1000021=3 \cdot 5 \cdot 163 \cdot 409$ \\
+    $1000006=2 \cdot 7 \cdot 71429$ & $1000022=2 \cdot 7 \cdot 71429$ \\
+    $1000007=29 \cdot 34483$ & $1000023=29 \cdot 34483$ \\
+    $1000008=2^{3} \cdot 3^{2} \cdot 17 \cdot 19 \cdot 43$ & $1000024=2^{3} \cdot 3^{2} \cdot 17 \cdot 19 \cdot 43$ \\
+    $1000009=293 \cdot 3413$ & $1000025=293 \cdot 3413$ \\
+    $1000010=2 \cdot 5 \cdot 11 \cdot 9091$ & $1000026=2 \cdot 5 \cdot 11 \cdot 9091$ \\
+    $1000011=3 \cdot 333337$ & $1000027=3 \cdot 333337$ \\
+    $1000012=2^{2} \cdot 13 \cdot 19231$ & $1000028=2^{2} \cdot 13 \cdot 19231$ \\
+    $1000013=7 \cdot 373 \cdot 383$ & $1000029=7 \cdot 373 \cdot 383$ \\
+    $1000014=2 \cdot 3 \cdot 166669$ & $1000030=2 \cdot 3 \cdot 166669$ \\
+    $1000016=2^{4} \cdot 62501$ & \\
+    \end{tabular}
