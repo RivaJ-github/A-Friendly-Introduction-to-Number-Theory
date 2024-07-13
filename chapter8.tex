@@ -1,0 +1,84 @@
+\chapter{同余式}
+\begin{theorem}[线性同余定理]
+设$a$，$c$与$m$是整数，$m\ge1$，且设$g=\gcd(a,m)$。\par
+（a）如果$g\mid c$，则同余式$ax\equiv c\pmod m$没有解。\par
+（b）如果$g\nmid c$，则同余式$ax\equiv c\pmod m$恰好有$g$个解。要求这些解，首先求线性方程
+\[au+mv=g\]
+的一个解$(u_0,v_0)$（见第6章）。则$x_0=cu_0/g$是$ax\equiv c\pmod m$的解，不同余解的完全集由
+\[x\equiv x_0+k\cdot\frac{m}{g}\pmod m,\quad k=0,1,2,\cdots,g-1\]
+给出。
+\end{theorem}
+\begin{theorem}[模$p$多项式根定理]
+设$p$为素数，
+\[f(x)=a_0x^d+a_1x^{d-1}+\cdots+a_d\]
+是次数为$d\ge 1$的整系数多项式，且$p$不整除$a_0$，则同余式
+\[f(x)\equiv 0\pmod p\]
+最多有$d$个模$p$不同余的解。
+\end{theorem}
+%
+\exercise 已知$a_1\equiv b_1\pmod m$及$a_2\equiv b_2\pmod m$。于是存在整数$x$，$y$使得$a_1 - b_1 = mx$，$a_2 - b_2 = my$。于是
+\[(a_1+a_2) - (b_1 + b_2) = mx + my = m(x+y)\]
+所以$a_1+a_2\equiv b_1+b_2\pmod m$。\par
+又有
+\[(a_1-a_2) - (b_1 - b_2) = mx - my = m(x-y)\]
+所以$a_1+a_2\equiv b_1+b_2\pmod m$。\par
+类似地
+\begin{align*}
+a_1a_2 - b_1b_2 &= (b_1+mx)(b_2+my) - b_1b_2 \\
+&= b_1my + b_2mx +m^2xy \\
+&= m(b_1y+b_2x +mxy)
+\end{align*}
+所以$a_1a_2\equiv b_1b_2\pmod m$。
+%
+\exercise 已知$ac\equiv bc\pmod m$，于是存在唯一整数$x$使得
+\[ac - bc = (a-b)c= mx\]
+又因为$\gcd(c, m) = 1$，所以$m$整除$a-b$，证毕。
+%
+\exercise a）$x\equiv 9\pmod {15}$\par
+b）无解\par
+c）$x\equiv 1,3,5,7\pmod 8$\par
+d）$x\equiv 3,4\pmod 7$\par
+e）无解\par
+%
+\exercise a）记$a=b+100c$，其中$b$是$a$的后两位数。模4得到$a\equiv b\pmod4$。所以$a$整除4，当且仅当$b$整除4。\par
+b）同上，略。\par
+c）记$a=a_1+a_2\cdot10+a_3\cdot100+\cdots$，其中$a_1$，$a_2$，$a_3$，$\cdots$是$a$各个数位上的值。基于$10\equiv 1\pmod3$，得到
+\[a\equiv a_1+a_2+a_3+\cdots\pmod3\]
+所以$a$被3整除，当且仅当其各位数字之和被3整除。\par
+d）同上，略。\par
+e）基于$10\equiv -1\pmod{11}$，得到
+\[a\equiv a_1-a_2+a_3-a_4+\cdots\pmod{11}\]
+%
+\exercise a）$6,13\pmod{14}$\par
+b）无解。\par
+c）$5,18,31,44,57,70,83\pmod{91}$
+%
+\exercise a）因为$\gcd(72,200)=8$不整除47，所以无解。\par
+b）$\gcd(4183, 15087)=47$整除5781，所以有47个解。\par
+c）因为$\gcd(1537,6731)=53$不整除2863，所以无解。
+%
+\exercise 运行code/exe\_7\_7.py得到（程序不会在无解时输出错误信息，而是返回空数组）：\par
+[]\par
+[225, 546, 867, 1188, 1509, 1830, 2151, 2472, 2793, 3114, 3435, 3756, 4077, 4398, 4719, 5040, 5361, 5682, 6003, 6324, 6645, 6966, 7287, 7608, 7929, 8250, 8571, 8892, 9213, 9534, 9855, 10176, 10497, 10818, 11139, 11460, 11781, 12102, 12423, 12744, 13065, 13386, 13707, 14028, 14349, 14670, 14991]\par
+[]
+%
+\exercise 参考code/exe\_7\_8.py：
+\begin{center}
+\begin{tabular}{c|l}
+$m$ & $X$ with $f(X)\equiv0\pmod m$ \\
+130 & [2, 47, 67, 112] \\
+137 & [99, 104] \\
+144 & [] \\
+151 & [84, 105] \\
+158 & [36, 115] \\
+165 & [122, 137, 152] \\
+172 & [74, 160] \\
+\end{tabular}
+\end{center}
+%
+\exercise a）有两个解$X=1$，$X=9$。\par
+b）有4个解$\{1,3,5,7\}$，而这并不与模$p$多项式根定理矛盾，因为8不是素数。
+%
+\exercise 最多有4个解。\par
+\proof 假设$r_1,\cdots,r_5$是5个不同的解。而由于$p$是素数，$x^2-a\equiv0\pmod p$最多有两个不同的解，记为$s_1$，$s_2$。$r_1,\cdots,r_5$必须与$s_1$，$s_2$中的一个模$p$同余。所以其中至少有三个$r_i$模$p$同余。不失一般性，可以假设$r_1\equiv r_2\equiv r_3\pmod p$。再考虑$x^2-a\equiv0\pmod q$最多有两个解，记为$t_1$，$t_2$。同理$r_1$，$r_2$，$r_3$必须与$t_1$，$t_2$中的一个模$p$同余。不失一般性地，可假设$r_1\equiv r_2\pmod q$。于是$r_1\equiv r_2\pmod{pq}$，所以假设不成立，不可能有超过4个解存在。\par
+另一方面，可以容易地找到有4个解的例子。比如，如果$p$和$q$是不同的奇素数，则$x^2\equiv 1\pmod{pq}$总是有4个解。如$x^2\equiv 1\pmod{15}$有解1，4，11，14。

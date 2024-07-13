@@ -1,3 +1,5 @@
+import math
+
 '''
 两数是否互素
 '''
@@ -29,6 +31,9 @@ def gcd(a, b):
         return a
     return gcd(b, a%b)   
 
+'''
+求最大公约数以及ax+by=gcd(a,b)的解
+'''
 def gcdWithXY(a, b):
     if (b == 0):
         return (a, 1, 0)
@@ -39,8 +44,8 @@ def gcdWithXY(a, b):
         s = x - q * v
         x, g = v, w
         v, w = s, t
-    while (x <= 0):
-        x += b
+    
+    x -= math.floor(x / b) * b 
     return (g, x, (g - a * x) // b)
 
 
@@ -48,7 +53,7 @@ def LCM(m, n):
     return m // gcd(m, n) * n 
 
 if __name__ == '__main__':
-    # print(isPrime(316258250, 1160718174))
+    print(gcd(1547, 6731))
     # print(factoringPrimeFactors(12))
     # # print(gcd(0, 0))
     # def exe_5_4_a(m, n):
