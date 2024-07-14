@@ -1,0 +1,66 @@
+\chapter{同余式、幂与费马小定理}
+\begin{theorem}[费马小定理]
+设$p$是素数，$a$是任意整数且$a\not\equiv0\pmod p$，则
+\[a^{p-1}\equiv 1\pmod p\]
+\end{theorem}
+\begin{lemma}
+设$p$为素数，$a$是任意整数且$a\not\equiv0\pmod p$，则数
+\[a,2a,3a,\cdots,(p-1)a\pmod p\]
+与数
+\[1,2,3,\cdots,(p-1)\pmod p\]
+相同，尽管它们的次序不同。
+\end{lemma}
+%
+\exercise a）$794=11\cdot72+2$且$9^{72}\equiv1\pmod{73}$，所以
+\[9^{794}=9^{11\cdot72+2}={9^{72}}^{11}\cdot9^2\equiv9^2\equiv8\pmod {73}\]
+即$a=8$\par
+b）由费马小定理$x^{28}\equiv1\pmod{29}$，所以
+\[x^{86}=x^{3\cdot28+2}\equiv x^2\equiv6\pmod{29}\]
+枚举得$x=8$，$x=21$\par
+c）由费马小定理$x^{12}\equiv1\pmod{13}$，所以
+\[x^{39}=x^{3\cdot12+3}\equiv x^3\equiv3\pmod{13}\]
+枚举发现方程无解。
+%
+\exercise a）10以内的素数的计算结果：
+\begin{center}
+\begin{tabular}{c|c}
+$p$ & $(p-1)!\pmod p$ \\
+\hline
+2 & $1\equiv -1$ \\
+3 & $2\equiv -1$ \\
+5 & $4\equiv -1$ \\
+7 & $6\equiv -1$ \\
+\end{tabular}
+\end{center}
+猜测$(p-1)!\equiv 1\pmod p$。（Wilson定理）\par
+b）对于$\forall a\in [1, p-1]$，$ax\equiv1\pmod p$在$[1, p-1]$上有解。我们将其称为逆元。考虑是否存在逆元是其本身的$a$，即
+\[a^2\equiv 1\pmod p\]
+由于$p$整除$a^2-1=(a-1)(a+1)$，所以$a=1$或$a=p-1$。而对于$a\in [2, p-2]$总能将其分为两两一组，其积模$p$余1。于是
+\[(p-1)!\equiv 1\cdot(p-1)\equiv -1\pmod p\]
+%
+\exercise a）对合数进行计算（当然利用了计算机，见code/exe\_9\_3.py）：
+\begin{center}
+\begin{tabular}{c|c}
+$m$ & $(m-1)!\pmod m$ \\
+\hline
+4 & 2 \\
+6 & 0 \\
+8 & 0 \\
+9 & 0 \\
+10 & 0 \\
+12 & 0 \\
+14 & 0 \\
+15 & 0 \\
+16 & 0 \\
+18 & 0 \\
+20 & 0 \\
+\end{tabular}
+\end{center}
+合理地猜测，当$m\ge6$时，$(m-1)!\equiv 0\pmod m$。\par
+b）显然，如果$(n-1)!\equiv \pmod n$是$-1$，则$n$是素数，否则，如果是0或2，则是合数。其他情况不可能出现。
+%
+\exercise 费马小定理也可以如下表述：
+\[a^{n-1}\not\equiv 1\pmod n\,\Rightarrow n\text{是合数或}n\mid a\,\]
+a）能。$1734251=1171\cdot1481$\par
+b）能。$64027 = 43\cdot 1489$\par
+c）不能。因为$1\mid 2$，不满足费马小定理的条件。事实上$52633=7\cdot 73\cdot 103$。
