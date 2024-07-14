@@ -1,0 +1,42 @@
+\chapter{同余式、幂与欧拉公式}
+\begin{theorem}[欧拉公式]
+如果$\gcd(a, m) = 1$，则
+\[a^{\phi(m)}\equiv 1\pmod m\]
+其中$\phi(m)$是1与$m$之间与$m$互素的整数个数。记为$\phi(m)=\#\{a:1\le a \le m,\,\gcd(a,m)=1\}$（欧拉函数）。
+\end{theorem}
+\begin{lemma}
+如果$\gcd(a, m) = 1$，则数列
+\[b_1a,b2_a, b_3a,\cdots,b_{\phi(m)}a\pmod m\]
+与数列
+\[b_1,b2_, b_3,\cdots,b_{\phi(m)}\pmod m\]
+相同，尽管它们可能次序不同。
+\end{lemma}
+%
+\exercise a）因为$\gcd(b_i,m)=1$，根据线性同余定理，恰好存在一个模$m$的解。所以对于任意$b_i$，存在一个$b_j$使得$b_ib_j\equiv 1\pmod m$，如果$i\not=j$则，可将$b_i$和$b_j$从$B$中消去。所以同余式$B$可以表示为满足$b_i^2\equiv1\pmod m$的$b_i$。令$c_1,c_2,\cdots,c_r$为满足该性质的$b_i$。\par
+接下来考虑同余式$c_ix\equiv-1\pmod m$。再次利用线性同余定理，存在一个模$m$的解，假设是$x=d$。同余式两边平方，且已知$c_i^2\equiv 1\pmod m$，得到$d^2\equiv 1\pmod m$，所以$d$必须是某个$c_j$，且一定不是$c_i$。通过这种方式每个$c_i$与不同的$c_j$组成一对，使得$c_ic_j\equiv -1\pmod{m}$。这意味着我们可以消去$c_ic_j$，代之以因子$-1$。最终我们将消去$B$中所有的$b_i$，剩下一堆$-1$的乘积。因此$B\equiv \pm 1\pmod{m}$\par
+b）下表是$2\le m\le20$的例子：
+\begin{center}
+\begin{tabular}{c||c|c|c|c|c|c|c|c|c|c|}
+$m$ & & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ \\
+\hline
+$B\pmod m$ &  & $-1$ & $-1$ & $-1$ & $-1$ & $-1$ & $-1$ & $1$ & $-1$ & $-1$ \\
+\hline
+\hline
+$m$ & 11 & $12$ & $13$ & $14$ & $15$ & $16$ & $17$ & $18$ & $19$ & $20$ \\
+\hline
+$B\pmod m$ & $-1$ & $1$ & $-1$ & $-1$ & $1$ & $1$ & $-1$ & $-1$ & $-1$ & $1$ \\
+\hline
+\end{tabular}
+\end{center}
+a）中证明了$B\equiv (-1)^t\pmod m$，其中$t$是$x^2\equiv 1\pmod m$的解的个数的一半。实时证明当且仅当模$m$有原根时$B\equiv -1\pmod m$，否则$B\equiv 1\pmod m$。有论文证明模$m$有原根，当且仅当$m=2$，$m=4$，$m=p^k$，$m=2p^k$，其中$p$是奇素数，$k\ge1$
+%
+\exercise 根据欧拉公式，$7^{\phi(3750)}=7^{1000}\equiv1\pmod{3750}$，所以$a\equiv7^{3003}\equiv(7^3=343)\pmod{3750}$。又因为$1\le a\le5000$，所以$a=343$或$a=343+3750=4093$。又因为$7\nmid a$所以$a=4093$。
+%
+\exercise a）对于任意$a$（$\gcd(a, 561)=1$）。根据费马小定理
+\[a^2\equiv1\pmod3\quad a^{10}\equiv1\pmod{11}\quad a^{16}\equiv1\pmod{17}\]
+因为560被2，10，16整除。所以
+\[a^{560}=(a^2)^{280}\equiv 1^{280}\equiv1\pmod 3\]
+\[a^{560}=(a^{10})^{56}\equiv 1^{56}\equiv1\pmod{11}\]
+\[a^{560}=(a^{16})^{35}\equiv 1^{35}\equiv1\pmod{17}\]
+这意味着$a^{560}-1$同时被2，11，17整除，所以也被561整除。因此$a^{560}\equiv 1\pmod{561}$。\par
+b）接下来的两个米歇尔数是$1105=5\cdot13\cdot17$和$1729=7\cdot13\cdot19$。一般而言，不同素数的乘积$m=p_1p_2\cdots p_r$，如果满足$p_i-1$整除$m-1$，则$m$是一个米歇尔数。存在无限个米歇尔数，但是它的证明非常困难。
