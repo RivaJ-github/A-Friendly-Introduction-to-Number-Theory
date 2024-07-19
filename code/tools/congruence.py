@@ -1,4 +1,5 @@
 from .prime import gcdWithXY
+from .prime import factoringPrimeFactors
 
 '''
     返回与x同余的最小正整数。
@@ -17,3 +18,13 @@ def linearCongruence(a, c, m):
         return [x + k * m // g for k in range(0, g)]
     # 无解返回空列表
     return []
+
+'''
+    求欧拉函数phi(n)
+'''
+def phi(n):
+    factors = factoringPrimeFactors(n)
+    res = n
+    for [p, _] in factors:
+        res *= (p - 1) / p
+    return int(res)

@@ -1,0 +1,195 @@
+\chapter{欧拉$\phi$函数与中国剩余定理}
+\begin{theorem}[$\phi$函数公式]
+（a）如果$p$是素数且$k\ge1$，则
+\[\phi(p^k)=p^k-p^{k-1}\]
+（b）如果$\gcd(m, n)=1$，则$\phi(mn)=\phi(m)\phi(n)$
+\end{theorem}
+\begin{theorem}[中国剩余定理]
+设$m$与$n$是整数，$\gcd(m,n)=1$，$b$与$c$是任意整数。则同余式组
+\[x\equiv b\pmod m,\quad x\equiv c\pmod n\]
+恰有一个解$0\le x<mn$。
+\end{theorem}
+%
+\exercise a）97是素数，所以$\phi(97)=96$\par
+b）$8800=2^5\cdot5^2\cdot11$，所以$\phi(8800)=(2^5-2^4)\cdot(5^2-5)\cdot10=3200$
+%
+\exercise a）将$m$分解为$m=p_1^{e_1}p_2^{e_2}\cdots p_k^{e_k}$，则
+\[\phi(m)=(p_1^{e_1}-p_1^{e_1-1})\cdot(p_2^{e_2}-p_2^{e_2-1})\cdots(p_k^{e_k}-p_k^{e_k-1})\]
+注意，如果$p$是奇数，则$p^e-p^{e-1}$总是偶数。对于$p=2$，则仅当$e=1$时，$2^e-2^{e-1}$是奇数。所以唯一使得$\phi(m)$为奇数的情况是$m=2$（当然还有$\phi(1)=1$）。\par
+b）如果$m$有两个奇素数因子，则$\phi(m)$有两个偶因子分别来自两个$p^e-p^{e-1}$，则它会被4整除。所以$m$必须形如$2^r$或$2^rp^e$。\par
+首先验证$m=2^r$的情况，$\phi(2^r)=2^r-2^{r-1}=2^{r-1}$，所以$r<3$，即只有$\phi(2)=1$和$\phi(4)=2$不被4整除。\par
+接下来考虑$m=p^e$，其中$p$是奇素数。$\phi(m)=p^e-p^{e-1}=p^{e-1}(p-1)$。$p-1$是偶数，且当$p\equiv 1\pmod4$时，能被4整除。所以$\phi(p^e)$不能被4整除，当且仅当$p\equiv 3\pmod4$。\par
+最后，考察$m=2^rp^e$，其中$p$是奇素数，$r\ge1$，则$\phi(2^rp^e)=(2^r-2^{r-1})(p^e-p^{e-1})=2^{r-1}p^{e-1}(p-1)$。$p-1$有一个因子2，所以$r$必须为1，以防止出现第二个因子2。\par
+综上，$\phi(m)$不被4整除，仅当$m=1$，$m=2$，$m=4$，$m=p^e$，$m=2p^e$（其中素数$p\equiv3\pmod4$）
+%
+\exercise 将$m$分解为素数的乘积$m=p_1^{k_1}p_2^{k_2}\cdots p_r^{k_r}$。则
+\begin{align*}
+\phi(m)&=(p_1^{k_1}-p_1^{k_1-1})\cdots(p_r^{k_r}-p_r^{k_r-1})\\
+&=p_1^{k_1}p_2^{k_2}\cdots p_r^{k_r}\left(1-\frac{1}{p_1}\right)\left(1-\frac{1}{p_2}\right)\cdots\left(1-\frac{1}{p_r}\right) \\
+&=m\left(1-\frac{1}{p_1}\right)\left(1-\frac{1}{p_2}\right)\cdots\left(1-\frac{1}{p_r}\right) 
+\end{align*}
+显然1\,000\,000仅有两个不同的素因子2和5。所以
+\[\phi(1000000)=1000000\left(1-\frac{1}{2}\right)\left(1-\frac{1}{5}\right)=400000\]
+%
+\exercise 见code/tools/congruence.py
+\begin{lstlisting}
+'''
+    求欧拉函数phi(n)
+'''
+def phi(n):
+    factors = factoringPrimeFactors(n)
+    res = n
+    for [p, _] in factors:
+        res *= (p - 1) / p
+    return int(res)
+\end{lstlisting}
+%
+\exercise a）将$x=7y+3$代入第二个同余式，
+\[7y+3\equiv 5\pmod 9\quad \text{于是} \quad 7y\equiv2\pmod9\]
+对此，可尝试$y=0,1,\cdots8$，发现解是$y=8$。于是$x=7y+3=59$\par
+b）将$x=37y+3$代入第二个同余式，
+\[37y+3\equiv 1\pmod {87}\quad \text{于是} \quad 37y\equiv-2\pmod{87}\]
+本例使用枚举法就过于复杂了，更好的做法是使用欧拉算法。首先解$37u-87v=1$，根据欧拉算法的过程：
+\begin{align*}
+87&= 2\cdot37+13 \\
+37&= 2\cdot13+11 \\
+13&= 1\cdot11+2 \\
+11&= 5\cdot2+1 \\
+5&=5\cdot1 + 0
+\end{align*}
+于是
+\begin{align*}
+1&= 11 - 5\cdot2 \\
+&= 11 - 5\cdot(13-11) = 6\cdot11-5\cdot13 \\
+&= 6\cdot(37-2\cdot13)-5\cdot13 = 6\cdot37-17\cdot13 \\
+&= 6\cdot37-17\cdot(87-2\cdot37)=40\cdot37-17\cdot87 
+\end{align*}
+因此$40\cdot37\equiv 1\pmod{87}$，乘以$-2$得到
+\[37\cdot(-80)\equiv -2\pmod{87}\]
+这与下式等同
+\[37\cdot7\equiv -2\pmod{87}\]
+所以$y=7$，于是$x=37y+3=262$\par
+c）首先$x = 5+7y$。分别代入第二、三个同余式，得$5+7y\equiv2\pmod{12}$和$5+7y\equiv8\pmod{13}$。问题转化为解两个同余式$7y\equiv9\pmod{12}$和$7y\equiv3\pmod{13}$。（这就同前两小题等同了）\par
+首先解$7y\equiv9\pmod{12}$，需要解
+\[7y=9+12z\]
+由于$\gcd(7,12) = 1$，所以也可以使用欧拉算法。当然也可以试根直接得到$y=3$，$z=1$。然后得到所有整数解$y=3+12w$，$z=1-12w$。将$y=3+12w$代入$7y\equiv3\pmod{13}$，得到$7(3+12w)\equiv3\pmod{13}$。所以我们要解
+\[84w\equiv-18\pmod{13}\quad \Leftrightarrow\quad 6w\equiv8\pmod{13}\]
+解$6w=8+13u$，得到$w=10$，$u=4$。于是
+\[w=10,\quad y=3+12w=123,\quad x=5+7y=866\]
+%
+\exercise 利用下面的事实：
+\begin{gather*}
+70\equiv 1\pmod3\quad \equiv0\pmod5\quad \equiv0\pmod7 \\
+21\equiv 0\pmod3\quad \equiv1\pmod5\quad \equiv0\pmod7 \\
+15\equiv 0\pmod3\quad \equiv0\pmod5\quad \equiv1\pmod7
+\end{gather*}
+因此$(2*70)+(3*21)+(2*15)=233$满足结论。由于105整除3、5和7。于是减去$2*105$得到最小解为23。
+%
+\exercise 蛋的数量$x$满足下面6个同余式：
+\begin{center}
+\begin{tabular}{ccc}
+$x\equiv1\pmod2$ & $x\equiv1\pmod3$ & $x\equiv1\pmod4$ \\ 
+$x\equiv1\pmod5$ & $x\equiv1\pmod6$ & $x\equiv0\pmod7$ \\ 
+\end{tabular}
+\end{center}
+虽然系数都不互素，但是我们发现$x\equiv 1\pmod{12}$与模2，3，4和6的结论是等效的。因此，我们只需计算下面3个同余式:
+\[x\equiv 1\pmod{12}\qquad x\equiv1\pmod5\qquad x\equiv0\pmod7\]
+前两式等效于$x\equiv 1\pmod{60}$，因此可设$x=1+60y$，将其代入第三个同余式，得到
+\[60y\equiv -1\pmod7\quad\Rightarrow\quad 4y\equiv 6\pmod7\]
+上式有解$y=5$，所以原式有解$x=301$。因此货车里最少有鸡蛋301个。第二小的可能是$301+420=721$个。
+%
+\exercise 见code/exe11\_8.py
+\begin{lstlisting}
+def solution(b, m, c, n):
+    (g, u, _) = gcdWithXY(m, n)
+    if (g != 1):
+        raise Exception("gcd(m, n) != 1")
+    x = b + u * (c - b) * m
+    return minCongruence(x, n * m)
+\end{lstlisting}
+分析：设$x = b + u'm = c + v'n$，于是$u'm - v'n = c - b$。由于$\gcd(m, n) = 1$，所以方程$um - vn = 1$有解。利用欧拉算法得到$u$（见工具方法gcdWithXY）。于是$u'm - v'n = c - b$有解$u'=u(c-b)$，代入原式得到$x = b + u * (c - b) * m$。此时得到的解并不一定是最小的，最后通过minCongruence方法获取满足$0\le x<mn$的解。
+%
+\exercise 直接证明一般情况。条件为对任意的$m_i$和$m_j$（$i\not=j$），需满足$\gcd(m_i, m_j) = 1$。\par
+\proof 假设条件成立，对于任意的$i$，设$N_i$为除$m_i$外所有$m$的乘积，则$N_i$与$m_i$互素。所以以下方程有解：
+\[m_ix_i + N_iy_i = 1\]
+注意$N_iy_i$被除$m_i$外所有$m_j$整除，所以$N_iy_i\equiv0\pmod{m_j}$，但是模$m_i$的情况如下
+\[N_iy_i = 1-m_ix_i\equiv 1\pmod{m_i}\]
+现在设$x=a_1N_1y_1+a_2N_2y_2+\cdots + a_rN_ry_r + k\prod m_i$。对其模$m_i$，有
+\begin{align*}
+x &= a_1N_1y_1+a_2N_2y_2+\cdots + a_rN_ry_r+ k\prod m_i \\
+&\equiv 0 + \cdots + 0 + a_i\cdot 1 + 0 + \cdots + 0 \\
+&\equiv a_i\pmod{m_i}
+\end{align*}
+总存在整数$k$使得$0\le x < \prod m_i$。
+%
+\exercise 由练习2，$\phi(n)$必是偶数。所以要使$\phi(n)$是素数，则$\phi(n)=2$。$n=3,4,6$\par
+要使$\phi(n)$是素数的平方，则$\phi(n)=4$。$n=5,8,10,12$
+%
+\exercise a）分解$160=2^5\cdot5$，有很多办法得到因子5，如$\phi(11)=10$，$\phi(25)=20$，$\phi(41)=40$。也有很多办法得到2的幂，如$\phi(2^k)=2^{k-1}$，$\phi(3)=2$，$\phi(5)=4$，，$\phi(17)=16$。组合这些方法，可以得到以下12个$n$使得$\phi(n)=160$。
+\[187,205,328,352,374,400,410,440,492,528,600,620\]
+b）素数$p$要整除$n$，则$p$或$p-1$要整除$\phi(n)=1000$。能整除1000的数如下：
+\[1,2,4,5,8,10,20,25,40,50,100,125,200,250,500,1000\]
+其中仅有2，5是素数。给这个列表的每个数加1得到：
+\[2,3,5,6,9,11,21,26,41,51,101,126,201,251,501,1001\]
+其中素数有
+\[2,3,5,11,41,101,251\]
+这个列表正是可能整除$n$的所有素数。\par
+c）逐个进行分析。假设$251\mid n$，即$n=251m$，显然$251\nmid m$，于是$\phi(m)=1000/\phi(251)=4$，由练习11.10知$m\in\{5,8,10,12\}$，所以$x\in \{1255,2008,2510,3012\}$。\par
+类似地，如果$n=101m$，则$\phi(m)=10$，于是$m\in \{11,22\}$，$n\in\{1111,2222\}$。\par
+如果$n=41m$，则$\phi(m)=25$，然而找不到符合条件的$m$。\par
+还需要考虑的情形是$n=2^u3^v5^w11^x$。由于1000被$5^3$整除，我们需要考虑$w=4$，$x=0$或$w=3$，$x\ge1$的情况。\par
+首先考虑$w=4$，$x=0$，即$n=2^u3^v5^4$，于是
+\[2^3\cdot5^3=\phi(n)=\phi(2^u3^v)\cdot5^3\cdot4\]
+所以$\phi(2^u3^v)=2$，仅有的可能是$2^u3^v\in\{3,4,6\}$，得到$n\in\{1875,2500,3750\}$。\par
+最后考虑$w=3$，$x\ge1$，
+\[2^3\cdot5^3=\phi(n)=\phi(2^u3^v)\cdot(5^2\cdot4)(11^{x-1}\cdot10)\]
+所以$\phi(2^u3^v)\cdot11^{x-1}=1$，只能是$x=1$，$v=0$，$u=0$或1。得到$x\in\{1375,2750\}$。
+综上，所有满足$\phi(n)=1000$的$n$有以下可能：
+\[1111,1255,1375,1875,2222,2500,2510,2750,3012,3750\]
+%
+\exercise 根据练习11.3，如果$n$有不同的素因数$p_1,\cdots p_r$，则
+\[\phi(n)=n\left(1-\frac{1}{p_1}\right)\left(1-\frac{1}{p_2}\right)\cdots\left(1-\frac{1}{p_r}\right)\]
+于是
+\[\frac{\phi(n)}{n}=\frac{(p_1-1)(p_2-1)\cdots(p_r-1)}{p_1p_2\cdots p_r}\]
+a）由于$\phi(n)=n/2$，所以
+\[\frac{1}{2}=\frac{(p_1-1)(p_2-1)\cdots(p_r-1)}{p_1p_2\cdots p_r}\]
+变形为
+\[p_1p_2\cdots p_r=2(p_1-1)(p_2-1)\cdots(p_r-1)\]
+不妨令$p_1<p_2<\cdots<p_r$，由于最大的素数$p_r$不能整除$p_1-1$，$p_2-1$，$\cdots$，$p_r-1$中的任何一个，所以它只能整除2，即$p_r=2$。这意味着$n$是2的幂，所以$\phi(n)=n/2$，当且仅当$n=2^i$。\par
+b）类似地，我们可以得到
+\[p_1p_2\cdots p_r=3(p_1-1)(p_2-1)\cdots(p_r-1)\]
+同理，必须有$p_r=3$，代入上式得到
+\[p_1p_2\cdots p_{r-1}=(p_1-1)(p_2-1)\cdots(p_{r-1}-1)\cdot 2\]
+所以$p_{r-1}=2$。这意味着$\phi(n)=n/3$，当且仅当$n=2^i3^j$。\par
+c）同样遵循前两例的流程
+\[p_1p_2\cdots p_r=6(p_1-1)(p_2-1)\cdots(p_r-1)\]
+$p_r$整除6，所以$p_r=2$或$3$。但如果$p_r=2$，则等式左侧没有因子3，所以必须有$p_r=3$，代入上式得到
+\[p_1p_2\cdots p_{r-1}=2(p_1-1)(p_2-1)\cdots(p_{r-1}-1)\cdot 2\]
+这意味着左侧需要提供两个相同的素因子2，而这不可能。所以$\phi(n)=n/6$无解。
+%
+\exercise a）借助计算机，得到下表：
+\begin{center}
+\begin{tabular}{c|*{9}{c}}
+$a$ & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+\hline
+$a^{1000}$的末4位 & 9376 & 1 & 9376 & 625 & 9376 & 1 & 9376 & 1 & 0\\
+\end{tabular}
+\end{center}
+\begin{center}
+\begin{tabular}{c|*{10}{c}}
+$a$ & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19 & 20\\
+\hline
+$a^{1000}$的末4位 & 1 & 9376 & 1 & 9376 & 625 & 9376 & 1 & 9376 & 1 & 0\\
+\end{tabular}
+\end{center}
+b）规律如下
+\begin{align*}
+a^{1000}&\equiv 1\pmod{10000}&\text{if}\gcd(10,a)&=1 \\
+a^{1000}&\equiv 9376\pmod{10000}&\text{if}\gcd(10,a)&=2 \\
+a^{1000}&\equiv 625\pmod{10000}&\text{if}\gcd(10,a)&=5 \\
+a^{1000}&\equiv 0\pmod{10000}&\text{if}\gcd(10,a)&=10
+\end{align*}
+c）考虑任意不为2或5的素数$p$，且$\gcd(10,p)=1$由欧拉公式$p^8\equiv1\pmod{16}$，$p^{500}\equiv1\pmod{625}$。所以$p^{1000}\equiv1\pmod{16}$，$p^{1000}\equiv1\pmod{625}$。由中国剩余定理$p^{1000}\equiv1\pmod{1000}$。\par
+于是对于式1，不妨令$a=p_1^{r_1}\cdots p_k^{r_k}$，其中$p_i\not\in\{2,5\}$，所以$a^{1000}\equiv 1\pmod{10000}$成立。\par
+对于式2，$a=2^rp_1^{r_1}\cdots p_k^{r_k}$，由于已知$2^{1000}\equiv9376\pmod{10000}$，所以$a^{1000}=(2^{1000})^r(p_1^{r_1}\cdots p_k^{r_k})^1000\equiv 2^{1000}\equiv9376\pmod{10000}$成立。\par
+（3）（4）式同上。

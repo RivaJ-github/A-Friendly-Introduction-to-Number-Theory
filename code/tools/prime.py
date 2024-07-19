@@ -32,6 +32,14 @@ def gcd(a, b):
     return gcd(b, a%b)   
 
 '''
+求正余数
+'''
+def minCongruence(a, b):
+    if (b < 0):
+        raise Exception('b must be a positive integer')
+    return a - math.floor(a / b) * b 
+
+'''
 求最大公约数以及ax+by=gcd(a,b)的解
 '''
 def gcdWithXY(a, b):
@@ -45,7 +53,7 @@ def gcdWithXY(a, b):
         x, g = v, w
         v, w = s, t
     
-    x -= math.floor(x / b) * b 
+    x = minCongruence(x, b) 
     return (g, x, (g - a * x) // b)
 
 
@@ -54,7 +62,7 @@ def LCM(m, n):
 
 if __name__ == '__main__':
     # print(gcd(1547, 6731))
-    print(factoringPrimeFactors(52633))
+    print(factoringPrimeFactors(8800))
     # # print(gcd(0, 0))
     # def exe_5_4_a(m, n):
     #     print(f'LCM({m}, {n}) = {LCM(m, n)}')
