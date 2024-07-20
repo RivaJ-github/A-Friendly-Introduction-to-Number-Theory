@@ -191,5 +191,5 @@ a^{1000}&\equiv 0\pmod{10000}&\text{if}\gcd(10,a)&=10
 \end{align*}
 c）考虑任意不为2或5的素数$p$，且$\gcd(10,p)=1$由欧拉公式$p^8\equiv1\pmod{16}$，$p^{500}\equiv1\pmod{625}$。所以$p^{1000}\equiv1\pmod{16}$，$p^{1000}\equiv1\pmod{625}$。由中国剩余定理$p^{1000}\equiv1\pmod{1000}$。\par
 于是对于式1，不妨令$a=p_1^{r_1}\cdots p_k^{r_k}$，其中$p_i\not\in\{2,5\}$，所以$a^{1000}\equiv 1\pmod{10000}$成立。\par
-对于式2，$a=2^rp_1^{r_1}\cdots p_k^{r_k}$，由于已知$2^{1000}\equiv9376\pmod{10000}$，所以$a^{1000}=(2^{1000})^r(p_1^{r_1}\cdots p_k^{r_k})^1000\equiv 2^{1000}\equiv9376\pmod{10000}$成立。\par
+对于式2，$a=2^rp_1^{r_1}\cdots p_k^{r_k}$，已知$2^{1000}\equiv9376\pmod{10000}$，所以$a^{1000}=(2^{1000})^r(p_1^{r_1}\cdots p_k^{r_k})^{1000}\equiv 2^{1000}\equiv9376\pmod{10000}$成立。\par
 （3）（4）式同上。
