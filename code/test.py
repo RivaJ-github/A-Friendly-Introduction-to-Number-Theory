@@ -12,4 +12,12 @@ from tools import gcd, phi, factoringPrimeFactors
 
 # print(443**4 % 10000)
 
-print(factoringPrimeFactors(931))
+# print(factoringPrimeFactors(257))
+
+i = 4
+while True:
+    factors = factoringPrimeFactors((3**i - 1) // 2)
+    if (len(factors) == 1 and factors[0][1] == 1):
+        print(i)
+        break
+    i += 1
