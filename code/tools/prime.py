@@ -60,6 +60,14 @@ def gcdWithXY(a, b):
 def LCM(m, n):
     return m // gcd(m, n) * n 
 
+def sigma(n):
+    factors = factoringPrimeFactors(n)
+    res = 1
+    for factor in factors:
+        res *= factor[0] ** (factor[1] + 1) - 1
+        res //= factor[0] - 1
+    return res
+
 if __name__ == '__main__':
     # print(gcd(1547, 6731))
     print(factoringPrimeFactors(8800))

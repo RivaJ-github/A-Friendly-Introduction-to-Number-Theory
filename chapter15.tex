@@ -1,0 +1,138 @@
+\chapter{梅森素数与完全数}
+\begin{theorem}[欧几里得完全数公式]
+如果$2^p-1$是素数，则$2^{p-1}(2^p-1)$是完全数。
+\end{theorem}
+\begin{theorem}[欧拉完全数定理]
+如果$n$是偶完全数，则$n$形如
+\[n=2^{p-1}(2^p-1)\]
+其中$2^p-1$是梅森素数。
+\end{theorem}
+\begin{theorem}[$\sigma$函数公式]
+（a）如果$p$是素数，$k\le1$，则
+\[\sigma(n)=1+p+p^2+...+p^k=\frac{p^{k+1}-1}{p-1}\]
+（b）如果$\gcd(m,n)=1$，则
+\[\sigma(mn)=\sigma(m)\sigma(n)\]
+\end{theorem}
+%
+\exercise 设$d_1,\cdots,d_r$是能整除$m$的数，$e_1\cdots e_s$是能整除$n$的数。由于$m$和$n$互素，所以通过任取$d_i,e_j$的乘积，可以得到所能整除$mn$的数，即
+\[\sigma(mn)=\prod d_ie_j=(d_1+\cdots+d_r)(e_1+\cdots+e_s)=\sigma(m)\sigma(n)\]
+%
+\exercise 可以使用code/exe\_15\_3计算任意$\sigma$函数的值。\par
+a）$\sigma(10)=18$，b）$\sigma(20)=42$，c）$\sigma(1728)=5080$
+%
+\exercise a、b）
+\[\sigma(p^k)=\frac{p^{k+1}-1}{p-1}<\frac{p^{k+1}}{p-1}=\left(\frac{p}{p-1}\right)p^k\]
+由于$p>2$时$p/(p-1)<2$，所以$\sigma(p^k)<2p^k$，因此如果$p$是奇素数，则$p^k$不可能是完全数。\par
+c、d）
+\begin{align*}
+\sigma(3^ip^j)&=\sigma(3^i)\sigma(p^j) \\
+&=\left(\frac{3^{i+1}-1}{3-1}\right)\left(\frac{p^{i+1}-1}{p-1}\right) \\
+&<\left(\frac{3^{i+1}}{3-1}\right)\left(\frac{p^{i+1}}{p-1}\right) \\
+&=\left(\frac{3p}{2(p-1)}\right)3^ip^j
+\end{align*}
+当$p>4$时，$3p/(2p-2)<2$，$\sigma(3^ip^j)<2\cdot3^ip^j$，证毕。\par
+e）
+\begin{align*}
+\sigma(q^ip^j)&=\sigma(q^i)\sigma(p^j) \\
+&=\left(\frac{q^{i+1}-1}{q-1}\right)\left(\frac{p^{i+1}-1}{p-1}\right) \\
+&<\left(\frac{q^{i+1}}{q-1}\right)\left(\frac{p^{i+1}}{p-1}\right) \\
+&=\left(\frac{qp}{(q-1)(p-1)}\right)q^ip^j
+\end{align*}
+假设$q^ip^j$是完全数，则$2<qp/((q-1)(p-1))$，交叉相乘并简化得到$qp-2q-2p-2<0$，变形可得$(q-2)(p-2)<2$，由于$p$，$q$是不同的奇素数，所以这是不可能的。即$p^iq^j$不可能是完全数。
+%
+\exercise 在练习15.3，已经证明了单个奇素数的幂和两个奇素数的幂的乘积的情况。因此，这里只需证明$m\ge1$且$n\ge1$且$k\ge1$的情况下，下式不可能成立。
+\begin{gather*}
+\sigma(3^m\cdot5^n\cdot7^k)=\left(\frac{3^{m+1}-1}{3-1}\right)\left(\frac{5^{n+1}-1}{5-1}\right)\left(\frac{7^{k+1}-1}{7-1}\right)=2\cdot3^m5^n7^k \\
+(3\cdot3^m-1)(5\cdot5^n-1)(7\cdot7^k-1)=96\cdot3^m\cdot5^n\cdot7^k
+\end{gather*}
+由于不能判定等式两边的大小关系，我们需要分情况讨论：\par
+1、$m=1$：\par
+原式转化为$(5\cdot5^n-1)(7\cdot7^k-1)=36\cdot3^m\cdot5^n\cdot7^k$，这是不可能的，因为左边肯定小于右边。\par
+2、$m\ge 2$，$n=k=1$：\par
+原式转化为$12(3\cdot3^m-1)=35\cdot3^m$，由于左侧是偶数，右侧是奇数，也不可能成立。所以$n$和$k$至少有一个大于1。\par
+3、$m,n\ge2$，$k\ge1$：\par
+由$p\cdot p^l-1=(p-\frac{1}{p^l})p^l$，可以得到
+\[3\cdot3^m-1\ge\frac{26}{9}3^m,\quad 5\cdot5^n-1\ge\frac{124}{25}5^n,\quad 7\cdot7^k-1\ge\frac{48}{7}7^k\]
+因此
+\begin{align*}
+(3\cdot3^m-1)(5\cdot5^n-1)(7\cdot7^k-1)&\ge \frac{26}{9}3^m\frac{124}{25}5^n\frac{48}{7}7^k \\
+&=\frac{51584}{525}\cdot3^m\cdot5^n\cdot7^k\\
+&>96\cdot3^m\cdot5^n\cdot7^k
+\end{align*}
+这种情况也不成立。\par
+4、$m,k\ge2$，$n\ge1$：\par
+同理可得
+\[3\cdot3^m-1\ge\frac{26}{9}3^m,\quad 5\cdot5^n-1\ge\frac{24}{5}5^n,\quad 7\cdot7^k-1\ge\frac{342}{49}7^k\]
+因此
+\begin{align*}
+(3\cdot3^m-1)(5\cdot5^n-1)(7\cdot7^k-1)&\ge \frac{26}{9}3^m\frac{24}{5}5^n\frac{342}{49}7^k \\
+&=\frac{23712}{245}\cdot3^m\cdot5^n\cdot7^k\\
+&>96\cdot3^m\cdot5^n\cdot7^k
+\end{align*}
+至此，我们已经讨论了所有的情况，$3^m\cdot5^n\cdot7^k$不可能是完全数。
+%
+\exercise 任意整数可以表示成素数幂的积，令$n=\prod p_i^{k_i}$，于是
+\begin{align*}
+\sigma(n^2)&=\prod\sigma(p_i^{2k_i}) \\
+&=\prod(p_i^{2k_i}+p_i^{2k_i-1}+\cdots+p_i+1)
+\end{align*}
+由于每一个乘积项都有奇数项，无论$p_i$是偶数还是奇数，每个乘积项都是奇数。所以$\sigma(n^2)$是奇数。但要使$n^2$是完全数，则$\sigma(n^2)=2n^2$需要是偶数。所以平方数不可能是完全数。
+%
+\exercise a）6,8,10,14,15,21,22,26,27,33,34,35,38,39,46\par
+b）积完全数必须形如$p^3$或$pq$，其中$p$和$q$是不同的素数。\par
+c）\proof 假设积完全数$m$被（至少）两个不同的素数$p$和$q$整除。则$m$至少被$m/p$和$m/q$整除。则
+\[m=(\text{整除$m$的数的乘积})\ge\frac{m}{p}\cdot\frac{m}{q}=\frac{m^2}{pq}\]
+整理得到$pq\ge m$，但是$p$和$q$也整除$m$，所以$pq\le m$。唯一可能的情况是$pq=m$。这说明如果积完全数$m$被两个及以上的不同素数整除，则它只能是$pq$的形式。\par
+剩余的情况是$m$仅有一个素因子，即$m=p^k$。它有因子$1,p,p^2,\cdots,p^k$，它的因子的乘积（除本身）是
+\[1\cdot p\cdot p^2\cdot p^3\cdots p^k=p^{(k-1)k/2}\]
+这应等于$m=p^k$，所以$(k-1)k/2=k$，得到$k=3$。即如果$m$是积完全数，且只有一个素因子，则它必定形如$p^3$。
+%
+\exercise a）见code/tools/prime.py
+\begin{lstlisting}
+def sigma(n):
+    factors = factoringPrimeFactors(n)
+    res = 1
+    for factor in factors:
+        res *= factor[0] ** (factor[1] + 1) - 1
+        res //= factor[0] - 1
+    return res
+\end{lstlisting}
+b）根据code/exe\_15\_7.py的计算结果，$2\le n\le100$有2个完全数，75个不足数，22个过剩数。$100<n\le200$没有完全数，有76个不足数，24个过剩数。\par
+据此可以猜测不足数更普遍。
+%
+\exercise a）\proof 根据定义$\sigma(n)-n$是$n$是真因子之和。亲和数定义$\sigma(n)-n=m$，$\sigma(m)-m=n$，$\Leftrightarrow$，$\sigma(n)=\sigma(m)=n+m$。\par
+b）略\par
+c）\proof 
+\begin{align*}
+\sigma(m)=\sigma(2^epq)&=(2^{e+1}-1)(p+1)(q+1) \\
+&=(2^{e+1}-1)\cdot3\cdot2^{e-1}\cdot3\cdot2^e \\
+&=3^2\cdot2^{2e-1}\cdot(2^{e+1}-1) \\
+\sigma(n)=\sigma(2^er)&=(2^{e+1}-1)(r+1) \\
+&=9\cdot2^{2e-1}\cdot(2^{e+1}-1) \\
+m+n&=2^epq+2^er \\
+&=2^e\left((3\cdot2^{e-1}-1)(3\cdot2^e-1)+(9\cdot2^{2e-1}-1)\right)\\
+&=2^e(9\cdot2^{2e-1}-3\cdot2^{e-1}-3\cdot2^e+9\cdot2^{2e-1}) \\
+&=2^e(9\cdot2^{2e}-3^2\cdot2^{e-1}) \\
+&=2^{2e-1}\cdot9\cdot(2^{e-1}-1)\\
+\end{align*}
+d）code/exe\_15\_8.py尝试了$2\le e\le 100$的所有情况，并建表如下：
+\begin{center}
+\begin{tabular}{c|c|c|c|c|c}
+\hline
+$e$ & $p$ & $q$ & $r$ & $m=2^epq$ & $n=2^er$ \\
+\hline
+2 & 5 & 11 & 71 & 220 & 284 \\
+\hline
+4 & 23 & 47 & 1151 & 17296 & 18416 \\
+\hline
+7 & 191 & 383 & 73727 & 9363584 & 9437056 \\
+\hline
+\end{tabular}
+\end{center}
+其他的可能值因为值过大，运行了很久也没能得到，事实上可能超出了整型的范围。
+%
+\exercise 见Henri Cohen, \emph{Mathematics of Computation} \bf{24} (1970), 423--429\par
+a）12496，14288，15472，14536，14264\par
+b）1264460，1547860，1727636，1305184\par
+c）805984760，1268997640，1803863720，2308845400，3059220620，3367978564，2525983930，2301481286，1611969514\par
+d）90632826380，101889891700，127527369100，159713440756，129092518924，106246338676
