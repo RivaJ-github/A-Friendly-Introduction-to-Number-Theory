@@ -34,5 +34,5 @@ from tools import successive_square, sigma, gcd, phi, factoringPrimeFactors
 # print(successive_square(7, 7392, 7393))
 # print(factoringPrimeFactors(7387))
 # print(factoringPrimeFactors(7393))
-print(successive_square(2, 9990, 9991))
-print(factoringPrimeFactors(9991))
+# print(successive_square(2, 9990, 9991))
+# print(factoringPrimeFactors(9991))

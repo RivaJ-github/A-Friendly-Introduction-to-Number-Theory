@@ -40,7 +40,8 @@ def minCongruence(a, b):
     return a - math.floor(a / b) * b 
 
 '''
-求最大公约数以及ax+by=gcd(a,b)的解
+解ax+by=gcd(a,b)
+返回(g, x, y)
 '''
 def gcdWithXY(a, b):
     if (b == 0):

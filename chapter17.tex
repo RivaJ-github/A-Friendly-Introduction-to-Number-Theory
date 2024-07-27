@@ -1,0 +1,51 @@
+\chapter{计算模m的k次根}
+\begin{algorithm}[如何计算模$m$的$k$次根]
+设$b$，$k$，$m$是已知整数，满足
+\[\gcd(b, m)=1\quad\text{与}\quad \gcd(k,\phi(m))=1\]
+下述步骤给出同余式
+\[x^k\equiv b\pmod m\]
+的解。
+\begin{enumerate}
+\item 计算$\phi(m)$。
+\item 求满足$ku-\phi(m)v=1$的正整数$u$与$v$。（另一种叙述方法是$u$为满足$ku\equiv 1\pmod{\phi(m)}$的正整数，所以$u$实际上是$k\pmod{\phi(m)}$的逆。）
+\item 用逐次平方法计算$b^u\pmod{m}$，所得值给出解$x$。
+\end{enumerate}
+\end{algorithm}
+%
+\exercise 首先分解$1147=31\cdot37$，于是$\phi(1147)=30\cdot36=1080$。接着解$ku-\phi(m)v=1$，即$329u-1080v=1$，得到$u=929$，$v=283$。通过通过逐次平方法解得
+\[x=b^u=452^{929}\equiv763\pmod{1147}\]
+%
+\exercise a）463是素数，所以$\phi(463)=462$。解$113u-462v=1$，得$(u,v)=(323,79)$。于是，解是$347^{323}\equiv 37\pmod{463}$。\par
+b）$588=2^2\cdot3\cdot7^2$，所以$\phi(588)=168$。解$275u-168v=1$，得$(u,v)=(11,18)$。于是，解是$139^{11}\equiv 559\pmod{588}$。
+%
+\exercise a）我们已经知道在该假设下，$b$确实有模$m$的$k$次根，假设$a$和$A$都是。由于$\gcd(k,\phi(m))=1$，所以$ku+\phi(m)v=1$有解。根据欧拉定理$a^{\phi(m)}\equiv A^{\phi(m)}\equiv 1\pmod m$，所以
+\[a=a^{ku+\phi(m)v}=(a^k)^u\cdot\left(a^{\phi(m)}\right)^v\equiv b^u\cdot 1^v\equiv b^u\pmod m\]
+通过同样的计算过程，可得$A\equiv b^u\pmod m$，所以$a\equiv A\pmod m$。这显示$b$有且仅有一个模$m$的$k$次根。\par
+b）TODO: 有点超前，据说用阿贝尔群可以很容易地证明。\par
+c）答案是$b$有$\gcd(k, p-1)$个模$p$的$k$次根。TODO: 学习第20章原根后
+%
+\exercise a）需要证明的是$(b^u)^k\equiv b\pmod m$，这意味着要检查$m$整除$(b^u)^k -b$。分解$m=p_1p_2\cdots p_r$，其中$p_1,\cdots p_r$各不相同。所以我们要检查每个$p_i$整除$(b^u)^k -b$。如果$p_i$凑巧整除$b$，则$p_i$显然整除$(b^u)^k -b$。如果$p_i$不整除$b$，考虑
+\[\phi(m)=(p_1-1)(p_2-1)\cdots(p_r-1)\]
+可以看出$p_i-1$整除$\phi(m)$。这意味着
+\[uk=1+\phi(m)v=1+(p_i-1)w\quad \text{存在整数$w$}\]
+于是根据费马小定理$b^{p_i-1}\equiv 1\pmod{p_i}$（因为$p_i$不整除$b$），
+\[(b^u)^k=b^{uk}=b\dot(b^{p_i-1})^w\equiv b\pmod{p_i}\]
+至此，我们证明了所有$p_i$都整除$(b^u)^k -b$，所以$(b^u)^k\equiv b\pmod m$。\par
+b）本例中$k=5$，$m=9$，所以$\phi(m)=6$。解$ku-\phi(m)v=5u-6v=1$得到$(u,v)=(5,4)$。然后计算$b^u\pmod m$，即$6^5\equiv 0\pmod 9$。但是显然$x=0$不是同余式$x^5\equiv6\pmod9$的解。事实上，该同余式没有解。
+%
+\exercise a）因为$\gcd(\phi(1279), 2)\not\equiv1\pmod 1279$，导致$2u-\phi(1279)v=1$无解。\par
+b）同上由于$\phi(p)=p-1$是奇数，$2u-\phi(p)v=1$无解。\par
+c）同上，略。
+%
+\exercise 见code/exe\_17\_6.py
+\begin{lstlisting}
+def solution(k, b, m):
+    if gcd(b, m) != 1:
+        raise Exception('b and m must be coprime')
+    _phi = phi(m)
+    (g, u, v) = gcdWithXY(k, _phi)
+    if g != 1:
+        raise Exception('k and phi(m) is not coprime')
+    else:
+        return successive_square(b, u, m)
+\end{lstlisting}
