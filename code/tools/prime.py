@@ -1,4 +1,5 @@
 import math
+import random
 
 '''
 两数是否互素
@@ -69,27 +70,65 @@ def sigma(n):
         res //= factor[0] - 1
     return res
 
-if __name__ == '__main__':
-    # print(gcd(1547, 6731))
-    print(factoringPrimeFactors(8800))
-    # # print(gcd(0, 0))
-    # def exe_5_4_a(m, n):
-    #     print(f'LCM({m}, {n}) = {LCM(m, n)}')
-    # exe_5_4_a(8, 12)
-    # exe_5_4_a(20, 30)
-    # exe_5_4_a(51, 68)
-    # exe_5_4_a(23, 18)
-    # exe_5_4_a(301337, 307829)
-    # print(gcdWithXY(37, 47))
-    # res = [2]
-    # n = 3
-    # while len(res) < 100:
-    #     flag = True
-    #     for p in res:
-    #         if not isPrime(n, p):
-    #             flag = False
-    #             break
-    #     if flag:
-    #         res.append(n)
-    #     n+=2
-    # print(res)
+def isCarmichael(n):
+    '''判断n是否是卡米歇尔数'''
+    factors = factoringPrimeFactors(n)
+    if len(factors) == 1:
+        return False
+    for factor in factors:
+        if (factor[1] > 1) or (n-1) % (factor[0] - 1) != 0:
+            return False
+    return True
+
+def RabinMillerTest(n, times = 10):
+    '''
+    合数的拉宾-米勒测试
+    @param n: 待测试合数
+    @param times: 测试次数
+    @return: 是否是合数（True则一定是合数，False则大概率是合数）
+    '''
+    k = 0
+    q = n - 1
+    while (q % 2 == 0):
+        q //= 2
+        k += 1
+    for i in range (0, times):
+        a = random.randint(2, n-2)
+        ss = successive_square(a, q, n)
+        if (ss == 1 or ss == n - 1): 
+            return False
+        for j in range(1, k):
+            ss = ss * 2 // n
+            if (ss == -1):
+                return False
+    return True
+
+def successive_square(a, k, m):
+    ''' 逐次平方法解a^k(mod m) '''
+    b = 1
+    while k >= 1:
+        if k % 2 == 1:
+            b = (b * a) % m
+        a = a * a % m
+        k = k // 2
+    return b
+
+class RSA:
+    def __init__(self, m, k, _phi = 0):
+        self.m = m
+        self.k = k
+        self._phi = _phi
+
+    def encode(self, a):
+        return successive_square(a, self.k, self.m)
+
+    def decode(self, b):
+        ''' 解码a的原文 '''
+        if not self._phi:
+            raise Exception('you should set privite key first') # only allow to decode when _phi is given
+        (g, u, v) = gcdWithXY(self.k, self._phi)
+        if g != 1:
+            raise Exception('the public/privite key you give is not correct') # k or _phi are not coprime here
+        else:
+            return successive_square(b, u, self.m)
+

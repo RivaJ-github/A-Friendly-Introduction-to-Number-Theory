@@ -1,4 +1,4 @@
-from tools import successive_square, sigma, gcd, phi, factoringPrimeFactors
+from tools import RabinMillerTest, isCarmichael, successive_square, sigma, gcd, phi, factoringPrimeFactors
 
 # for i in range(11, 21):
 #     print(i ** 1000 % 10000)
@@ -33,6 +33,17 @@ from tools import successive_square, sigma, gcd, phi, factoringPrimeFactors
 # print(successive_square(7, 7386, 7387))
 # print(successive_square(7, 7392, 7393))
 # print(factoringPrimeFactors(7387))
-# print(factoringPrimeFactors(7393))
+# print(factoringPrimeFactors(118901521))
 # print(successive_square(2, 9990, 9991))
 # print(factoringPrimeFactors(9991))
+
+# for i in [1105, 1235, 2821, 6601, 8911, 10659, 19747, 105545, 126217, 162401, 172081, 188461]:
+#     print(i)
+#     print(factoringPrimeFactors(i))
+#     print(isCarmichael(i))
+
+# print(isCarmichael(3))
+
+print([
+    RabinMillerTest(i) for i in [155196355420821961, 155196355420821889, 285707540662569884530199015485750433489, 285707540662569884530199015485751094149]
+])

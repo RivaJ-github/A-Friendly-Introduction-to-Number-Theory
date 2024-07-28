@@ -1,0 +1,155 @@
+\chapter{素性测试与卡米歇尔数}
+\begin{theorem}[卡米歇尔数的考塞特判别法]
+设$n$是合数，则$n$是卡米歇尔数当且仅当它是奇数，且整除$n$的每个素数$p$满足下述两个条件：
+\begin{enumerate}
+\item $p^2$不整除$n$；
+\item $p-1$不整除$n-1$。
+\end{enumerate}
+\end{theorem}
+\begin{theorem}[素数的一个性质]
+设$p$是奇素数，记
+\[p-1=2^kq,\quad q\text{是奇数}\]
+设$a$是不被$p$整除的整数。则下述两个条件之一成立：
+\begin{enumerate}
+\item $a^q$模$p$余1；
+\item 数$a^q$，$a^{2q}$，$a^{2^2q}$，$\cdots$，$a^{2^{k-1}q}$之一模$p$余$-1$。
+\end{enumerate}
+\end{theorem}
+\begin{theorem}[合数的拉宾--米勒测试]
+设$n$是奇素数，记$n-1=2^kq$，$q$是奇数。对不被$n$整除对某个$a$，如果下述两个条件都成立，则$n$是合数。
+\begin{enumerate}
+\item $a^q\not\equiv1\pmod n$；
+\item 对所有$i=0,1,2,\cdots,k-1$，$a^{2^iq}\not\equiv-1\pmod n$。
+\end{enumerate}
+\end{theorem}
+\hbox{\vrule
+  \vbox{\hrule
+    \hbox {\hfil
+      \vbox spread 8pt{\vfil
+        如果$n$是奇合数，则1与$n-1$之间至少有75\%的数可作为$n$对拉宾-米勒证据。
+      \vfil}
+    \hfil}
+  \hrule}
+\vrule}
+%
+\exercise a）$n$是卡米歇尔数，所以$g^n\equiv g\pmod n$，所以$g^n\equiv g\pmod p$。接着将$n$写成如下形式：
+\[n=(p-1)k+j\quad \text{其中}0\le j\le p-2\]
+由费马小定理：
+\[g^n=(g^{p-1})^k\cdot g^j\equiv g^j\pmod p\]
+所以$g^i\equiv g\pmod p$。但是$g$是模$p$的原根，$1,g,g^2,\cdots,g^{p-2}$模$p$不同余，所以$j=1$。这证明了
+\[n=(p-1)k+1\]
+因此$p-1$整除$n-1$。\par
+b）令$m=n/p$，写成$m=(p-1)u+v$（其中$0\le v\le p-2$）。仿照a）的计算过程：
+\begin{align*}
+g^n=g^{pm}&=(g^p)^{(p-1)u+v} \\
+&\equiv g^v\pmod p &\text{由于} g^p\equiv g\pmod p \\
+&& \text{和}g^{p-1}\equiv 1\pmod p
+\end{align*}
+同理可得$v=1$，$(n/p) - 1 = m-1=(p-1)u$
+%
+\exercise 不存在仅有两个素因数的卡米歇尔数。可以使用考塞特判别法证明，但是用练习19.1 b）的结论更容易证明。设$n=pq$，其中$p$和$q$都是奇素数。判别法要求$p-1$整除$(n/p)-1$，即$p-1$整除$q-1$，同理$q-1$整除$p-1$。这意味着$p=q$，$n=p^2$，但这与条件一矛盾，证毕。
+%
+\exercise a）$1105=5\cdot13\cdot17$，是卡米歇尔数。\par
+b）$1235=5\cdot13\cdot19$，不是卡米歇尔数。\par
+c）$2821=7\cdot13\cdot31$，是卡米歇尔数。\par
+d）$6601=7\cdot23\cdot41$，是卡米歇尔数。\par
+e）$8911=7\cdot19\cdot67$，是卡米歇尔数。\par
+f）$10659=3\cdot11\cdot17\cdot19$，不是卡米歇尔数。\par
+g）$19747=7\cdot13\cdot31$，不是卡米歇尔数。\par
+h）$105545=5\cdot11\cdot19\cdot101$，不是卡米歇尔数。\par
+i）$126217=7\cdot13\cdot19\cdot73$，是卡米歇尔数。\par
+j）$162401=17\cdot41\cdot233$，是卡米歇尔数。\par
+k）$172081=7\cdot13\cdot31\cdot61$，是卡米歇尔数。\par
+l）$188461=7\cdot13\cdot19\cdot109$，是卡米歇尔数。
+%
+\exercise a）\proof $n-1=(6k+1)(12k+1)(18k+1)-1=1296k^3+396k^2+36k=36k(36k^2+11k+1)$。$n$被$6k$，$12k$，$18k$整除，所以$n$是卡米歇尔数。\par
+b）运行code/exe\_19\_4.py，得到下表
+\begin{center}
+\begin{tabular}{c|c}
+$k$ & $n$ \\
+\hline
+1 & 1729 \\
+6 & 294409 \\
+35 & 56052361 \\
+45 & 118901521 \\
+51 & 172947529 \\
+\end{tabular}
+\end{center}
+%
+\exercise 略
+%
+\exercise a）这个算法不是很高效，但是正确的
+\begin{lstlisting}
+def isCarmichael(n):
+    '''判断n是否是卡米歇尔数'''
+    factors = factoringPrimeFactors(n)
+    if len(factors) == 1:
+        return False
+    for factor in factors:
+        if (factor[1] > 1) or (n-1) % (factor[0] - 1) != 0:
+            return False
+    return True
+\end{lstlisting}
+b、c）运行code/exe\_19\_6.py得到100000以内的卡米歇尔数有：
+\[561, 1105, 1729, 2465, 2821, 6601, 8911, 10585, 15841, 29341, 41041, 46657, 52633, 62745, 63973, 75361\]
+大于1000000的最小卡米歇尔数是：1024651
+%
+\exercise a）
+\begin{align*}
+2^{69}&\equiv -138\pmod{1105} \\
+2^{2\cdot69}&\equiv 259\pmod{1105} \\
+2^{4\cdot69}&\equiv -324\pmod{1105} \\
+2^{8\cdot69}&\equiv 1\pmod{1105}
+\end{align*}
+b）$n-1=299408=2^3\cdot36801$
+\begin{align*}
+2^{36801}&\equiv 512\pmod{299409} \\
+2^{2\cdot36801}&\equiv -32265\pmod{299409} \\
+2^{4\cdot36801}&\equiv 1\pmod{299409}
+\end{align*}
+$294409=37\cdot73\cdot109$
+\begin{align*}
+    294408&=36\cdot8178 \\
+    294408&=72\cdot4089 \\
+    294408&=108\cdot2726
+\end{align*}
+c））$n-1=118901520=2^4\cdot7431345$
+\begin{align*}
+2^{7431345}&\equiv 45274074\pmod{118901521} \\
+2^{2\cdot7431345}&\equiv 1758249\pmod{118901521} \\
+2^{4\cdot7431345}&\equiv 1\pmod{118901521} 
+2^{8\cdot7431345}&\equiv 1\pmod{118901521} \\
+\end{align*}
+$118901521=271\cdot541\cdot811$
+\begin{align*}
+    118901520&=270\cdot 438750 \\
+    118901520&=540\cdot 220188 \\
+    118901520&=810\cdot 146792
+\end{align*}
+%
+\exercise 
+\begin{lstlisting}
+def RabinMillerTest(n, times = 10):
+    '''
+    合数的拉宾-米勒测试
+    @param n: 待测试合数
+    @param times: 测试次数
+    @return: 是否是合数（True则一定是合数，False则大概率是合数）
+    '''
+    k = 0
+    q = n - 1
+    while (q % 2 == 0):
+        q //= 2
+        k += 1
+    for i in range (0, times):
+        a = random.randint(2, n-2)
+        ss = successive_square(a, q, n)
+        if (ss == 1 or ss == n - 1): 
+            return False
+        for j in range(1, k):
+            ss = ss * 2 // n
+            if (ss == -1):
+                return False
+    return True
+\end{lstlisting}
+根据测试b、c）是合数，a、d）大概率是素数
