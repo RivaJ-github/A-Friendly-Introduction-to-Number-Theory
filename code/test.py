@@ -61,8 +61,16 @@ from tools import RabinMillerTest, isCarmichael, successive_square, sigma, gcd, 
 #     B = (p - 1) // 2 * p - A
 #     print(f'{p} & {A} & {B} \\\\')
 
-for p in [5, 7, 11, 13, 19]:
-    res = set()
-    for i in range(1, p):
-        res.add(i**3 % p)
-    print(f'{p} & {res} \\\\')
+# for p in [5, 7, 11, 13, 19]:
+#     res = set()
+#     for i in range(1, p):
+#         res.add(i**3 % p)
+#     print(f'{p} & {res} \\\\')
+
+A = [11, 13, 23, 37, 47, 59, 61, 71, 73, 83, 97, 107, 109]
+B = [5, 7, 17, 19, 29, 31, 41, 43, 53, 67, 79, 89, 101, 103, 113, 127]
+m = 12
+a = [n % m for n in A]
+b = [n % m for n in B]
+print(a)
+print(b)
