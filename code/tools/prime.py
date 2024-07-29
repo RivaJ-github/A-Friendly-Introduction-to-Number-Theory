@@ -132,3 +132,9 @@ class RSA:
         else:
             return successive_square(b, u, self.m)
 
+def quadratic_residue(p):
+    '''计算素数p的二次剩余列表'''
+    res = []
+    for a in range(1, (p+1)//2):
+        res.append(a**2 % p)
+    return res

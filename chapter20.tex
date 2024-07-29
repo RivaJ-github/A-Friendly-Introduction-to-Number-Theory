@@ -1,0 +1,89 @@
+\chapter{模p平方剩余}
+\begin{theorem}
+设$p$为一个奇素数，则恰有$\frac{p-1}{2}$个模$p$的二次剩余，且恰有$\frac{p-1}{2}$个模$p$的二次非剩余。
+\end{theorem}
+\begin{theorem}[二次剩余乘法法则---版本1]
+设$p$为奇素数，则
+\begin{enumerate}
+\item 两个模$p$的二次剩余的积是二次剩余。
+\item 二次剩余与二次非剩余的积是二次非剩余。
+\item 两个二次非剩余的积是二次剩余。
+\end{enumerate}
+这三条法则可用符号表示如下：
+\[QR\times QR=QR,\quad QR\times NR=NR,\quad NR\times NR=QR\]
+\end{theorem}
+{\itshape $a$模$p$的勒让德符号是
+\[\left(\frac{a}{p}\right)=
+\begin{cases}
+1 & \text{若$a$是模$p$的二次剩余} \\
+-1 & \text{若$a$是模$p$的二次非剩余} \\
+\end{cases}
+\]}
+\begin{theorem}[二次剩余乘法法则---版本2]
+设$p$为奇素数，则
+\[\left(\frac{a}{p}\right)\left(\frac{b}{p}\right)=\left(\frac{ab}{p}\right)\]
+\end{theorem}
+%
+\exercise 二次剩余：$1, 4, 5, 6, 7, 9, 11, 16, 17$\par
+二次非剩余：$2,3,8,10,12,13,14,15,18$
+%
+\exercise a）
+\begin{center}
+\begin{tabular}{c|c|c}
+$p$ & $A$ & $B$ \\
+\hline 
+3 & 1 & 2 \\
+5 & 5 & 5 \\
+7 & 7 & 14 \\
+11 & 22 & 33 \\
+13 & 39 & 39 \\
+17 & 68 & 68 \\
+19 & 76 & 95 \\
+\end{tabular}
+\end{center}
+b）$A+B$是1到$p-1$的所有数字和，即$1+2+\cdots+(p-1)=(p-1)p/2$\par
+c）观察发现$p\ge5$时，$A\equiv B\equiv0\pmod p$。\par
+\proof 利用平方和公式：
+\[1^2+2^2+\cdots + N^2=N(N+1)(2N+1)/6\]
+令$N=(p-1)/2$，得：
+\[A\equiv 1^2+2^2+\cdots + \left(\frac{p-1}{2}\right)^2=\equiv\frac{p^3-p}{24}\pmod p\]
+因为$24=2^3\cdot3$，所以$p\ge5$时，24并不能消去分子中的$p$，所以$(p^3-p)/24\equiv 0\pmod p$，证毕。\par
+d）100以内的满足$A=B$的素数有$\{5,13,17,29,37,41,53,61,73,89,97\}$，都满足$p\equiv1\pmod4$。有理由猜测：
+\[p\equiv1\pmod4 \Longrightarrow A=B\]\par
+e）算法如下：
+\begin{lstlisting}
+def quadratic_residue(p):
+    '''计算素数p的二次剩余列表'''
+    res = []
+    for a in range(1, (p+1)//2):
+        res.append(a**2 % p)
+    return res
+
+def getAB(p):
+    lst = quadratic_residue(p)
+    A = 0
+    for i in lst:
+        A += i
+    B = (p - 1) // p * 2 - A
+    return (A, B)
+\end{lstlisting}
+测试结果均满足$B\ge A$，但还没有已知的初等证明方式。
+%
+\exercise a）
+\begin{center}
+\begin{tabular}{c|c}
+$p$ & 三次剩余 \\
+\hline
+5 & {1, 2, 3, 4} \\
+7 & {1, 6} \\
+11 & {1, 2, 3, 4, 5, 6, 7, 8, 9, 10} \\
+13 & {8, 1, 12, 5} \\
+\end{tabular}
+\end{center}\par
+b）19的三次剩余有：\{1, 7, 8, 11, 12, 18\}。2和4都不是三次剩余，但$8=2\cdot4$是三次剩余。2和3和$6=2\cdot3$都不是三次剩余\par
+c）如果$p\equiv2\pmod3$，则1到$p-1$的所有数都是模$p$的三次剩余。\par
+\proof 由于$\gcd(3, p-1)$，所以下面的同余式有解：
+\[3u+(p-1)v=1\]
+任取$a\not\equiv p$，令$b=a^u$，可得
+\[b^3=a^{3u}=a^{1-(p-1)v}\equiv a\pmod p\]
+所以$a$是模$p$的三次剩余，证毕。
