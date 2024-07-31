@@ -1,4 +1,4 @@
-from tools import RabinMillerTest, isCarmichael, successive_square, sigma, gcd, phi, factoringPrimeFactors
+from tools import JacobiSymbol, RabinMillerTest, isCarmichael, successive_square, sigma, gcd, phi, factoringPrimeFactors
 
 # for i in range(11, 21):
 #     print(i ** 1000 % 10000)
@@ -27,15 +27,9 @@ from tools import RabinMillerTest, isCarmichael, successive_square, sigma, gcd, 
 # for n in [10, 20, 1728]:
 #     print(sigma(n))
 
-# print(successive_square(2, 1000, 2379))
-# print(successive_square(567, 1234, 4321))
-# print(successive_square(47, 258008, 1315171))
-# print(successive_square(7, 7386, 7387))
-# print(successive_square(7, 7392, 7393))
-# print(factoringPrimeFactors(7387))
-# print(factoringPrimeFactors(118901521))
-# print(successive_square(2, 9990, 9991))
-# print(factoringPrimeFactors(9991))
+print(successive_square(2, (1293337 - 1) // 2, 1293337))
+print(JacobiSymbol(11, 1729))
+print(factoringPrimeFactors(1729))
 
 # for i in [1105, 1235, 2821, 6601, 8911, 10659, 19747, 105545, 126217, 162401, 172081, 188461]:
 #     print(i)
@@ -67,10 +61,19 @@ from tools import RabinMillerTest, isCarmichael, successive_square, sigma, gcd, 
 #         res.add(i**3 % p)
 #     print(f'{p} & {res} \\\\')
 
-A = [11, 13, 23, 37, 47, 59, 61, 71, 73, 83, 97, 107, 109]
-B = [5, 7, 17, 19, 29, 31, 41, 43, 53, 67, 79, 89, 101, 103, 113, 127]
-m = 12
-a = [n % m for n in A]
-b = [n % m for n in B]
-print(a)
-print(b)
+# A = [11, 13, 23, 37, 47, 59, 61, 71, 73, 83, 97, 107, 109]
+# B = [5, 7, 17, 19, 29, 31, 41, 43, 53, 67, 79, 89, 101, 103, 113, 127]
+# m = 12
+# a = [n % m for n in A]
+# b = [n % m for n in B]
+# print(a)
+# print(b)
+
+# print(JacobiSymbol(37603, 48661))
+# print(JacobiSymbol(85, 101))
+# print(JacobiSymbol(29, 541))
+# print(JacobiSymbol(101, 1987))
+# print(JacobiSymbol(31706, 43789))
+# print(JacobiSymbol(299, 397))
+# print(JacobiSymbol(14, 137))
+# print(JacobiSymbol(55, 179))

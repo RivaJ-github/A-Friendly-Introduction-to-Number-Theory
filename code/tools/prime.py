@@ -138,3 +138,21 @@ def quadratic_residue(p):
     for a in range(1, (p+1)//2):
         res.append(a**2 % p)
     return res
+
+def JacobiSymbol(a, b):
+    '''计算雅可比符号(a/b)'''
+    # 忽略参数校验，假设初始参数都是正奇数
+    if (a == 2):
+        return 1 if b % 8 == 1 or b % 8 == 7 else -1
+
+    flag = False    # 去除因子2
+    while (a % 2 == 0):
+        a //= 2
+        flag = not flag
+
+    res = JacobiSymbol(2, b) if flag else 1
+
+    if (a == 1):
+        return res
+
+    return res * JacobiSymbol(b % a, a)
