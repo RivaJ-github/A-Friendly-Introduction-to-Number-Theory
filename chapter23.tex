@@ -1,0 +1,104 @@
+\chapter{二次互反律的证明}
+\begin{theorem}[高斯准则]
+设$p$为奇素数，$a$是不被$p$整除的整数，记$P=\frac{p-1}{2}$，
+\[\mu(a,p)=\left({a,2a,3a,\cdots, Pa\text{模$p$简化到$-P$与$P$}\atop \text{之间后变为负数的那些整数的个数}}\right)\]
+则
+\[\left(\frac{a}{p}\right)=(-1)^{\mu(a,p)}\]
+\end{theorem}
+\begin{lemma}
+当$a, 2a, 3a,\cdots,Pa$模$p$简化到$-P$与$P$之间时，简化后的值时$\pm1,\cdots,\pm P$按某种顺序的排列，每个数以带正号的形式或带负号的形式出现一次。
+\end{lemma}
+\begin{lemma}
+设$p$为奇素数，令$P=\frac{p-1}{2}$，$a$是不被$p$整除的奇数，则有
+\[\sum_{k=1}^P \left\lfloor\frac{ka}{p}\right\rfloor\equiv\mu(a,p)\pmod2\]
+\end{lemma}
+%
+\exercise a）$\left\lfloor-\frac{7}{3}\right\rfloor=\lfloor-2.333\rfloor=-3$；b）$\left\lfloor\sqrt{23}\right\rfloor=\lfloor4.79\dots\rfloor=4$；c）$\left\lfloor\pi^{2}\right\rfloor=\lfloor9.86\dots\rfloor=9$；d）$\left\lfloor\frac{\sqrt{73}}{\sqrt[3]{19}}\right\rfloor=\lfloor3.20\dots\rfloor=3$
+%
+\exercise a）$n$是整数，$x$是实数，则根据定义有\[\lfloor x+n\rfloor=\lfloor x\rfloor+n\]
+于是
+\begin{align*}
+f(x+n)&=\lfloor2(x+n)\rfloor-2\lfloor x+n\rfloor \\
+&=\lfloor2x+2n\rfloor-2\lfloor x+n\rfloor \\
+&=(\lfloor 2x\rfloor+2n)-2(\lfloor x\rfloor+n) \\
+&=\lfloor2x\rfloor-2\lfloor x\rfloor \\
+&=f(x)
+\end{align*}
+b）\[f(x)=\begin{cases}
+0 & 0\le x<\frac{1}{2} \\
+1 & \frac{1}{2}\le x<1
+\end{cases}\]
+根据a）的结论，对任意实数$x$，都有$f(x)=0$或1。因为总可以将$x$表示为$x=n+t$，其中$n$是整数，$t$是实数，且$0\le t<1$。所以$f(x)=f(t)$，而我们的猜想适用于$f(t)$。\par
+c）\proof 若$0\le x<\frac{1}{2}$，则$0\le 2x<1$，所以
+\[f(x)=\lfloor 2x\rfloor-2\lfloor x\rfloor=0-0=0\]
+若$\frac{1}{2}\le x<1$，则$1\le 2x<2$，所以
+\[f(x)=\lfloor 2x\rfloor-2\lfloor x\rfloor=1-0=1\]
+%
+\exercise a）
+\begin{center}
+\begin{tabular}{rrrr}
+$g(0) = 0$ & $g(0.25)=0$ & $g(0.5)=1$ &  \\
+$g(1) = 2$ & $g(2)=4$ & $g(2.5)=5$ & $g(2.49)=4$ \\
+\end{tabular}
+\end{center}
+b）$g(x)=\lfloor 2x\rfloor$\par
+c）\proof 记$x=n+t$，其中$n$是整数，$0\le t<1$。如果$0\le t<\frac{1}{2}$，则
+\[g(x)=\lfloor n+t\rfloor+\left\lfloor n+t+\frac{1}{2}\right\rfloor=n+n=2n=2n+\lfloor2t\rfloor=\lfloor 2x\rfloor\]
+如果$\frac{1}{2}\le t<1$，则
+\[g(x)=\lfloor n+t\rfloor+\left\lfloor n+t+\frac{1}{2}\right\rfloor=n+n+1=2n+1=2n+\lfloor2t\rfloor=\lfloor 2x\rfloor\]
+d）
+\[g(x)=\lfloor x\rfloor\left\lfloor x+\frac{1}{3}\right\rfloor+\left\lfloor x+\frac{2}{3}\right\rfloor=\lfloor3x\rfloor\]
+证明过程类似c）
+e）\[g(x)=\lfloor x\rfloor\left\lfloor x+\frac{1}{N}\right\rfloor+\left\lfloor x+\frac{2}{N}\right\rfloor+\cdots + \left\lfloor x+\frac{N-1}{N}\right\rfloor=\lfloor Nx\rfloor\]
+\proof 将$x$分解为$x=n+t$并选择$0\le k<N$，考虑$k/N\le t<(k+1)/N$的场景。
+\begin{align*}
+\sum_{i=0}^{N-1}\left\lfloor x+\frac{i}{N}\right\rfloor&=\sum_{i=0}^{N-1}\left\lfloor n+t+\frac{i}{N}\right\rfloor=\sum_{i=0}^{N-1}n+\left\lfloor t+\frac{i}{N}\right\rfloor \\
+&=nN + \sum_{i=0}^{N-1}\left\lfloor t+\frac{i}{N}\right\rfloor
+\end{align*}
+注意到
+\[\frac{k+i}{N}\le t+\frac{i}{N}<\frac{k+i+1}{N}\]
+所以
+\[\left\lfloor t+\frac{i}{N}\right\rfloor=
+\begin{cases}
+0 & 0\le i \le N-k-1 \\
+1 & N-k\le i \le N-1
+\end{cases}\]
+因此
+\[\sum_{i=0}^{N-1}\left\lfloor x+\frac{i}{N}\right\rfloor=nN+\sum_{i=N-k}^{N-1}1=nN+k\]
+另一方面
+\[\lfloor Nx\rfloor=\lfloor Nn+Nt\rfloor=Nn+\lfloor Nt\rfloor\]
+由于$k/N\le t<(k+1)/N$，所以$\lfloor Nt\rfloor=k$，所以
+\[\lfloor Nx\rfloor=Nn+k\]
+%
+\exercise a）设$ka=q_kp+r_k$，已知$a$是偶数$p$是奇数，则对其模2得到
+\[0\equiv q_k+r_k\pmod 2\]
+对其求和可得
+\[0\equiv\sum_{k=1}^P q_k+\sum_{k=1}^P r_k\pmod 2\]
+引理23.2告诉我们$r_1,\cdots,r_p$是$\pm1,\cdots,\pm P$的某个排列。模2操作下可以忽略其符号。所以
+\[\sum_{k=1}^P r_k\equiv 1+2+\cdots + P\pmod 2\]
+对其求和：
+\[1+2+\cdots + P=\frac{P(P+1)}{2}=\frac{\frac{p-1}{2}\cdot\frac{p+1}{2}}{2}=\frac{p^2-1}{8}\]
+联立前面三式：
+\[\sum_{k=1}^P q_k\equiv\sum_{k=1}^P r_k\equiv\sum_{k=1}^P k\equiv\frac{p^2-1}{8}\pmod2\]
+在引理23.3的证明过程中，我们得到了
+\[\sum_{k=1}^P\left\lfloor\frac{ka}{p}\right\rfloor=\sum_{k=1}^P q_k-\mu(a,p)\]
+联立最后两式即得证。\par
+b）考虑
+\[\sum_{k=1}^P\left\lfloor\frac{2k}{p}\right\rfloor\]
+当$1\le k\le P$时，$2\le 2k\le p-1$，所以$\lfloor\frac{2k}{p}\rfloor=0$。因此和式为0。根据a）的结论：
+\[\mu(2,p)\equiv \frac{p^2-1}{8}\pmod2\]
+由高斯准则
+\[\left(\frac{2}{p}\right)=(-1)^{\mu(2, p)}=(-1)^{\frac{p^2-1}{8}}\]
+%
+\exercise a）$A=\frac{15}{2}$；$N=4$；$B=9$；$A-N-\frac{1}{2}B=-1$\par
+b）$A=12$；$N=7$；$B=12$；$A-N-\frac{1}{2}B=-1$\par
+c）显然可以猜想$A-N-\frac{1}{2}B=-1$\par
+d）\proof 显然位于$x$轴上的整数点有$a+1$个，位于竖线$x=b$上的整数点有$b+1$个。设$d=\gcd(a,b)$，则位于斜边上的点有$d+1$个，分别为
+\[(0,0),\left(\frac{a}{d}, \frac{b}{a}\right),\left(\frac{2a}{d}, \frac{2b}{a}\right),\cdots,\left(\frac{(d-1)a}{d}, \frac{(d-1)b}{a}\right)\]
+注意我们重复计算了三个顶点$(0,0),(a,0),(a,b)$。所以
+\[B=a+b+d,\qquad \text{其中}d=\gcd(a,b)\]
+面积$A=\frac{1}{2}ab$。\par
+构造一个矩形$(0, 0),(a,0),(0,b),(a,b)$，它将包括两个三角形。矩形内部有$(a-1)(b-1)$个点。这些内部点中，有$d-1$个点在对角线上。矩形内部不在对角线也不在边上的点的个数为：
+\[2N=(a-1)(b-1)-(d-1)\]
+现在可以计算：
+\[A-N-\frac{1}{2}B=\frac{1}{2}ab-\frac{(a-1)(b-1)-(d-1)}{2}-\frac{1}{2}(a+b+d)=-1\]
