@@ -156,3 +156,30 @@ def JacobiSymbol(a, b):
         return res
 
     return res * JacobiSymbol(b % a, a)
+
+def DesentProcedure(A, B, p):
+    ''' 
+    二次递降程序
+    start from A^2 + B^2 \equiv (mod p)
+    @return (u, v) 满足a^2 + b^2 = p
+    '''
+    M = (A**2 + B**2) // p
+    while (M > 1):
+        u = A % M
+        if (u > M // 2):
+            u -= M
+        v = B % M
+        if (v > M // 2):
+            v -= M
+        r = (u**2 + v**2) // M
+        A, B = abs(A*u + B*v) // M, abs(A*v - B*u) // M
+        M = r
+    return (A, B)
+
+def DesentProcedure_1(p):
+    ''' 
+    对满足p模8余5的p进行二次递降程序
+    @return (u, v) 满足a^2 + b^2 = p
+    '''
+    A = (-2 * successive_square(-4, (p-5)//8, p)) % p
+    return DesentProcedure(A, 1, p)

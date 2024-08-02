@@ -1,4 +1,4 @@
-from tools import JacobiSymbol, RabinMillerTest, isCarmichael, successive_square, sigma, gcd, phi, factoringPrimeFactors
+from tools import DesentProcedure_1, DesentProcedure, JacobiSymbol, RabinMillerTest, isCarmichael, successive_square, sigma, gcd, phi, factoringPrimeFactors
 
 # for i in range(11, 21):
 #     print(i ** 1000 % 10000)
@@ -27,9 +27,9 @@ from tools import JacobiSymbol, RabinMillerTest, isCarmichael, successive_square
 # for n in [10, 20, 1728]:
 #     print(sigma(n))
 
-print(successive_square(2, (1293337 - 1) // 2, 1293337))
-print(JacobiSymbol(11, 1729))
-print(factoringPrimeFactors(1729))
+# print(successive_square(2, (1293337 - 1) // 2, 1293337))
+# print(JacobiSymbol(11, 1729))
+# print(factoringPrimeFactors(12049))
 
 # for i in [1105, 1235, 2821, 6601, 8911, 10659, 19747, 105545, 126217, 162401, 172081, 188461]:
 #     print(i)
@@ -77,3 +77,32 @@ print(factoringPrimeFactors(1729))
 # print(JacobiSymbol(299, 397))
 # print(JacobiSymbol(14, 137))
 # print(JacobiSymbol(55, 179))
+
+# primeList = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+# # for p in range(5, 101, 2):
+# #     factors = factoringPrimeFactors(p)
+# #     if len(factors) == 1 and factors[0][1] == 1:
+# #         primeList.append(p)
+# # print(primeList)
+
+# for p in primeList:
+#     print(f'&{p}', end='')
+#     a = 1
+#     flag = False
+#     while (a ** 2 < p):
+#         b = 0
+#         while b <= a and b ** 2 + a ** 2 <= p:
+#             c = 0
+#             while c <= b and c ** 2 + b ** 2 + a ** 2 <= p:
+#                 if c ** 2 + b ** 2 + a ** 2 == p:
+#                     print(f'={a}^2+{b}^2+{c}^2', end='')
+#                     flag = True
+#                 c += 1
+#             b += 1
+#         a += 1
+#     if not flag:
+#         print('=None', end='')
+#     print('\\\\')
+
+# print(DesentProcedure(261, 947, 10, 96493))
+print(DesentProcedure_1(96493))
