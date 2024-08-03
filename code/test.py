@@ -1,4 +1,4 @@
-from tools import isPrime, DesentProcedure_1, DesentProcedure_2, DesentProcedure, JacobiSymbol, RabinMillerTest, isCarmichael, successive_square, sigma, gcd, phi, factoringPrimeFactors
+from tools import LiouvilleLambda, isPrime, DesentProcedure_1, DesentProcedure_2, DesentProcedure, JacobiSymbol, RabinMillerTest, isCarmichael, successive_square, sigma, gcd, phi, factoringPrimeFactors
 
 # for i in range(11, 21):
 #     print(i ** 1000 % 10000)
@@ -106,9 +106,12 @@ from tools import isPrime, DesentProcedure_1, DesentProcedure_2, DesentProcedure
 
 # print(DesentProcedure(261, 947, 10, 96493))
 
-for n in range(1, 301):
-    f = (n**2) - n + 41
-    if (not isPrime(f)):
-        # print(f'{n}, {f} is prime')
-        print(f'{n}, {f} is not prime')
-        break
+# for n in range(1, 301):
+#     f = (n**2) - n + 41
+#     if (not isPrime(f)):
+#         # print(f'{n}, {f} is prime')
+#         print(f'{n}, {f} is not prime')
+#         break
+
+for n in [30, 504, 60750]:
+    print(LiouvilleLambda(n))

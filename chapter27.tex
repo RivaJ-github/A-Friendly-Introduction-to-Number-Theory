@@ -1,0 +1,84 @@
+\chapter{欧拉$\phi$函数与因数和}
+定义：
+\[F(n)=\phi(d_1)+\phi(d_2)+\cdots_\phi(d_r),\quad\text{其中$d_1,d_2,\cdots,d_r$是$n$的因数}\]
+\begin{lemma}
+如果$\gcd(m,n)=1$，则$F(mn)=F(m)F(n)$
+\end{lemma}
+\begin{theorem}[欧拉$\phi$函数求和公式]
+设$d_1,d_2,\cdots,d_r$是$n$的因数，则
+\[\phi(d_1)+\phi(d_2)+\cdots+\phi(d_r)=n\]
+\end{theorem}
+%
+\exercise 设$m$，$n$互素，$d_1,d_2,\cdots,d_r$是$n$的因数，$e_1,e_2,\cdots,e_s$是$n$的因数。$m$，$n$互素意味着$mn$的因数有$d_1e_1,d_1e_2,d_2e_2,\cdots,d_re_s$。任意$d_i$与$e_j$互素，所以$f(d_ie_j)=f(d_i)f(e_j)$（利用$f$是积性函数）。利用这些事实：
+\begin{align*}
+g(mn)&=f(d_1e_1)+f(d_1e_2)+f(d_2e_1)+\cdots+f(d_re_s)\\
+&=f(d_1)f(e_1)+f(d_1)f(e_2)+f(d_2)f(e_1)+\cdots+f(d_r)f(e_s)\\
+&=(f(d_1)+f(d_2)+\cdots+f(d_r))(f(e_1)+f(e_2)+\cdots+f(e_s))\\
+&=g(m)g(n)
+\end{align*}
+所以$g$是积性函数。证毕。
+%
+\exercise a）$30=2\cdot3\cdot5$，$\lambda(30)=(-1)^3=-1$\par
+$504=2^3\cdot3^2\cdot7$，$\lambda(30)=(-1)^6=1$\par
+$60750=2\cdot3^5\cdot5^3$，$\lambda(30)=(-1)^9=-1$\par
+b）略，事实上$\lambda(mn)=\lambda(m)\lambda(n)$对于任意$mn$都成立。而不需要$\gcd(m,n)=1$.\par
+c）\begin{center}
+\begin{tabular}{*{19}{c}}
+\hline
+$n$ & 1 & 2&3&4&5&6&7&8&9&10&11&12&13&14&15&16&17&18 \\
+\hline
+$G(n)$&1&0&0&1&0&0&0&0&1&0&0&0&0&0&0&1&0&0\\
+\hline
+\end{tabular}
+\end{center}
+d）猜测$n$是平方数时$G(n)=1$，否则$G(n)=0$。\par
+e）根据练习27.1，由于$\lambda$是积性函数，所以$G$也是积性函数。所以，如果$\gcd(m,n)=1$，则$G(mn)=G(m)G(n)$。而计算$G(p^k)$是容易的：
+\begin{align*}
+G(p^k)&=\lambda(1)+\lambda(p)+\lambda(p^2)+\cdots+\lambda(p^k)\\
+&=1+(-1)+1+\cdots + (-1)^k\\
+&=\begin{cases}  
+1 & \text{if $k$ is even} \\
+0 & \text{if $k$ is odd}
+\end{cases}
+\end{align*}
+将$n$分解为素数乘积$n=p_1^{k_1}p_2^{k_2}\cdots p_r^{k_r}$，则
+\[G(n)=G(p_1^{k_1})G(p_2^{k_2})\cdots G(p_r^{k_r})=
+\begin{cases}  
+1 & \text{如果$k_1,k_2,\cdots,k_r$都是偶数} \\
+0 & \text{任意$k_i$是奇数}
+\end{cases}\]
+换句话说，如果$n$是完全平方数，则$G(n)=1$，否则$G(n)=0$。
+%
+\exercise a）
+\begin{align*}
+\sigma_2(12)&=1^2+2^2+3^2+4^2+6^2+12^2=210\\
+\sigma_3(10)&=1^3+2^3+5^3+10^3=1134\\
+\sigma_0(18)&=1^0+2^0+3^0+6^0+9^0+18^0=6
+\end{align*}
+b）注意到$\sigma_t(n)$等于$f(d_1)+f(d_2)+\cdots+f(d_r)$，其中$f(n)=n^t$。$f$显然是积性的，因为对任意$m$，$n$满足$f(m)(n)=f(m)f(n)$。所以$\sigma_t$也是积性的。\par
+如果$m$，$n$不互素，则通常$\sigma_t(mn)\not=f(m)f(n)$。例如，
+\[\sigma_t(4)=1+2^t+4^t\qquad \sigma_t(2)\sigma_t(2)=(1+2^t)^2=1+2\cdot2^t+4^t\]
+显然并不相等\par
+c）$p^k$的因子有$1,p,p^2,\cdots,p^k$，所以
+\begin{align*}
+\sigma_t(p^k)&=1^t+p^t+(p^2)^t+\cdots+(p^k)^t \\
+&=1+p^t+(p^t)^2+\cdots+(p^t)^k\\
+&=\frac{(p^t)^{k+1}-1}{p^t-1}
+\end{align*}
+该公式对于$t>0$成立。
+\[\sigma_4(2^6)=\frac{(2^4)^7-1}{2^4-1}=\frac{268435455}{15}=17895697\]
+d）显然$\sigma_0(p^k)=k+1$。分解素因数$42336000=2^8\cdot3^3\cdot5^3\cdot7^2$。
+\[\sigma_0(42336000)=\sigma_0(2^8)\cdot\sigma_0(3^3)\cdot\sigma_0(5^3)\cdot\sigma_0(7^2)=9\cdot4\cdot4\cdot3=432\]
+%
+\exercise a）$N(d_1)+N(d_2)+\cdots+N(d_r)=n$\par
+b）\[\frac{1}{12},\frac{1}{6},\frac{1}{4},\frac{1}{3},\frac{5}{12},\frac{1}{2},\frac{7}{12},\frac{2}{3},\frac{3}{4},\frac{5}{6},\frac{11}{12},\frac{1}{1}\]
+所以
+\begin{center}
+\begin{tabular}{|*{7}{c|}}
+$d$ & 1 & 2 & 3 & 4 & 6 & 12 \\
+$N(d)$ & 1 & 1 & 2 & 2 & 2 & 4 \\
+\end{tabular}
+\end{center}
+c）分式$a/n$的既约分数的分母为$n$当且仅当$\gcd(a, n)=1$，所以$N(n)=\phi(n)$\par
+d）分式$a/n$的既约分数的分母为$d$当且仅当$\gcd(a,n)=n/d$。设$a=(n/d)b$，则$\gcd(d, b)=1$。对于$1\le a\le n$，$d/n\le d\le d$，这与$1\le b\le d$相同。所以$N(d)$等于1到$d$之间满足$\gcd(d, b)=1$的$b$的个数，这恰恰是$\phi(d)$的定义。\par
+e）将$\phi(d)=N(d)$代入a）即证。

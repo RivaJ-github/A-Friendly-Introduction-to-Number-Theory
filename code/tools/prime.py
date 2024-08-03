@@ -210,3 +210,15 @@ def DesentProcedure_2(n):
             u, v = DesentProcedure(A, 1, p)
             x, y = x * u + y * v, abs(x * v - y * u)
     return (x * c, y * c)
+
+def LiouvilleLambda(n):
+    '''
+    计算刘维尔lambda函数：
+    @param n=p_1^k_1 p_2^k_2 ...
+    @return lambda(n) = (-1)^{k_1+k_2+...}
+    '''
+    fs = factoringPrimeFactors(n)
+    s = 0
+    for [_, r] in fs:
+        s = (s + r) % 2
+    return 1 if s == 0 else -1
