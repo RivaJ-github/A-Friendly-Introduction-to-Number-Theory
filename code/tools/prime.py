@@ -179,7 +179,33 @@ def DesentProcedure(A, B, p):
 def DesentProcedure_1(p):
     ''' 
     对满足p模8余5的p进行二次递降程序
-    @return (u, v) 满足a^2 + b^2 = p
+    @return (x, y) 满足x^2 + y^2 = p
     '''
     A = (-2 * successive_square(-4, (p-5)//8, p)) % p
     return DesentProcedure(A, 1, p)
+
+def DesentProcedure_2(n):
+    '''
+    利用二次递降程序分解n
+    @return (x, y) 满足x^2 + y^2 = n
+    '''
+    factors = factoringPrimeFactors(n)
+    c = 1 # x, y的公因数
+    x, y = 0, 1
+    for f in factors:
+        (p, r) = f
+        c = p ** (r // 2)
+        if (r % 2 == 1):
+            if p % 4 == 3:
+                raise Exception('n cannot be decomposed into a sum of squares')
+            while True:
+                a = random.randint(2, p)
+                if JacobiSymbol(a, p) == -1:
+                    A = successive_square(a, (p-1)//4, p)
+                    if (A != 1): # 不知道为什么会出现1
+                        break
+                else:
+                    print('Can false?')
+            u, v = DesentProcedure(A, 1, p)
+            x, y = x * u + y * v, abs(x * v - y * u)
+    return (x * c, y * c)

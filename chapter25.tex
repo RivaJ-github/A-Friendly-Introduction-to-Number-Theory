@@ -1,0 +1,101 @@
+\chapter{哪些数能表成两个平方数之和}
+\begin{theorem}[两平方数之和定理]
+设$m$是正整数。
+\begin{enumerate}
+\item 将$m$分解为
+\[m=p_1p_2\cdots p_r M^2\]
+其中$p_1$，$p_2$，$\cdots$，$p_r$是互不相同的素因子，则$m$可表成两个平方数之和的充要条件是每个$p_i$或为2或为模4余1.
+\item $m$能表成两平方数之和$m=a^2+b^2$且$\gcd(a,b)=1$，当且仅当一下两个条件之一成立：
+\begin{enumerate}
+\item $m$是奇数且$m$的每个素因子都模4余1；
+\item $m$是偶数，$m/2$是奇数且$m/2$的每个素因子都模4余1。
+\end{enumerate}
+\end{enumerate}
+\end{theorem}
+\begin{theorem}[毕达哥拉斯斜边命题]
+$c$是一个本原勾股数组斜边的充要条件是：$c$是模4余1的素数的乘积。
+\end{theorem}
+%
+\exercise a）$4370=2\cdot5\cdot19\cdot23$，因为$19\equiv3\pmod4$，所以它不能表成两个平方数之和。\par
+b）
+\begin{align*}
+1885&=5\cdot13\cdot29 \\
+&=(1^2+2^2)(2^2+3^2)(2^2+5^2)\\
+&=(8^2+1^2)(2^2+5^2) \\
+&=21^2+38^2 
+\end{align*}
+c）
+\begin{align*}
+1885&=29\cdot41\\
+&=(2^2+5^2)(4^2+5^2)\\
+&=33^2+10^2
+\end{align*}
+d）
+\begin{align*}
+3185&=5\cdot7^2\cdot13\\
+&=(1^2+2^2)(2^2+3^2)7^2\\
+&=(8^2+1^2)(7^2)\\
+&=7^2+56^2
+\end{align*}
+%
+\exercise a）偶数不能作为本原勾股数组的斜边。\par
+b）
+\begin{align*}
+&s=61\quad t=7\quad (a,b,c)=(427, 1836, 1885)\\
+&s=59\quad t=17\quad (a,b,c)=(1003, 1596, 1885)\\
+&s=53\quad t=31\quad (a,b,c)=(1643, 924, 1885)\\
+&s=49\quad t=37\quad (a,b,c)=(1813, 516, 1885)
+\end{align*}
+c）
+\begin{align*}
+&s=47\quad t=13\quad (a,b,c)=(611, 1020, 1189)\\
+&s=43\quad t=23\quad (a,b,c)=(989, 660, 1189)
+\end{align*}
+d）没有本原勾股数组以3185为斜边，但是有两个非本原勾股数组：
+\begin{align*}
+&s=77\quad t=21\quad (a,b,c)=(1617, 2744, 3185)\\
+&s=63\quad t=49\quad (a,b,c)=(3087, 784, 3185)
+\end{align*}
+%
+\exercise $(c-a)(c+a)=c^2-a^2=5929=7^2\cdot11^2$。将5929分解为两数乘积，有四种可能$(c-a, c+a)\in\{(1,5929),(7,847),(11,539),(49,121)\}$，对应四组解：
+\[(a,c)\in\{(36,85),(264,275),(420,427),(2964,2965)\}\]
+%
+\exercise 令$p=p_i\equiv3\pmod4$。假设$m=a^2+b^2$，则$a^2\equiv-b^2\pmod p$。由于$-1$不是模$p$的二次剩余，所以$p\mid a$且$p\mid b$。于是$p^2\mid m$，所以$p\mid M$。所以我们可以得到$m/p^2=p_1p_2\cdots p_r(M/p)^2$且$m/p^2=(a/p)^2+(a/p)^2$。重复此过程，我们会发现$p^2\mid m/p^2$。此过程终将停止，并引发矛盾。
+%
+\exercise 略。TODO: 有点难
+%
+\exercise a）运行code/exe\_25\_6.py得到如下结果：\par
+(\romannumeral1)$S(10)=1\quad n=3^2+1^2$\par
+(\romannumeral2)$S(70)=0$\par
+(\romannumeral3)$S(130)=2\quad n=11^2+3^2=9^2+7^2$\par
+(\romannumeral4)$S(1105)=4\quad n=33^2+4^2=32^2+9^2=31^2+12^2=24^2+23^2$\par
+b、c、d）$S(p_1p_2\cdots p_r)=2^{r-1}$，所以$S(p)=1$，$S(pq)=2$。TODO:证明有点难。
+%
+\exercise TODO: 经过了几组测试，还不确定是否完全正确
+\begin{lstlisting}
+def DesentProcedure_2(n):
+    '''
+    利用二次递降程序分解n
+    @return (x, y) 满足x^2 + y^2 = n
+    '''
+    factors = factoringPrimeFactors(n)
+    c = 1 # x, y的公因数
+    x, y = 0, 1
+    for f in factors:
+        (p, r) = f
+        c = p ** (r // 2)
+        if (r % 2 == 1):
+            if p % 4 == 3:
+                raise Exception('n cannot be decomposed')
+            while True:
+                a = random.randint(2, p)
+                if JacobiSymbol(a, p) == -1:
+                    A = successive_square(a, (p-1)//4, p)
+                    if (A != 1): # 不知道为什么会出现1
+                        break
+                else:
+                    print('Can false?')
+            u, v = DesentProcedure(A, 1, p)
+            x, y = x * u + y * v, abs(x * v - y * u)
+    return (x * c, y * c)
+\end{lstlisting}

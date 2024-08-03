@@ -1,4 +1,4 @@
-from tools import DesentProcedure_1, DesentProcedure, JacobiSymbol, RabinMillerTest, isCarmichael, successive_square, sigma, gcd, phi, factoringPrimeFactors
+from tools import DesentProcedure_1, DesentProcedure_2, DesentProcedure, JacobiSymbol, RabinMillerTest, isCarmichael, successive_square, sigma, gcd, phi, factoringPrimeFactors
 
 # for i in range(11, 21):
 #     print(i ** 1000 % 10000)
@@ -10,9 +10,9 @@ from tools import DesentProcedure_1, DesentProcedure, JacobiSymbol, RabinMillerT
 #         print(i)
 #         break
 
-# print(443**4 % 10000)
-
-# print(factoringPrimeFactors(257))
+# print(factoringPrimeFactors(5929))
+# for m in [4370, 1885, 1189, 3185]:
+#     print(factoringPrimeFactors(m))
 
 # i = 4
 # while True:
@@ -22,7 +22,7 @@ from tools import DesentProcedure_1, DesentProcedure, JacobiSymbol, RabinMillerT
 #         break
 #     i += 1
 
-# print(gcd(213408, 2205))
+# print(gcd(264, 275))
 
 # for n in [10, 20, 1728]:
 #     print(sigma(n))
@@ -106,3 +106,4 @@ from tools import DesentProcedure_1, DesentProcedure, JacobiSymbol, RabinMillerT
 
 # print(DesentProcedure(261, 947, 10, 96493))
 print(DesentProcedure_1(96493))
+print(DesentProcedure_2(96493))
