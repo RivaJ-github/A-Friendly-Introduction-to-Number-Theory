@@ -2,12 +2,6 @@ import math
 import random
 
 '''
-两数是否互素
-'''
-def isPrime(a, b):
-    return gcd(a, b) == 1
-
-'''
 分解质因素：
 TODO: It's slow! Do it better!
 '''
@@ -23,6 +17,13 @@ def factoringPrimeFactors(n):
             res.append((p, c))
         p += 1
     return res
+
+'''
+判断n是否是素数
+'''
+def isPrime(n):
+    fs = factoringPrimeFactors(n)
+    return len(fs) == 1 and fs[0][1] == 1
 
 '''
 最大公约数(欧几里得算法)

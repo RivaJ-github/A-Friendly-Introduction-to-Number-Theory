@@ -1,11 +1,11 @@
-from tools.prime import isPrime
+from tools.prime import gcd
 
 def getPrimitivePythagoreanTriple(target_length = 10):
     t = 1
     s = 3
     result = []
     while result.__len__() < target_length:
-        if (isPrime(s, t)):
+        if (gcd(s, t) == 1):
             result.append([s*t, (s*s - t*t)//2, (s*s + t*t)//2, s, t])
         t += 2
         if (s == t):

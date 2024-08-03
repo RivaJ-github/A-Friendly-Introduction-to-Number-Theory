@@ -1,4 +1,4 @@
-from tools.prime import isPrime
+from tools.prime import gcd
 
 def findPrimitivePythagoreanTripleWithSimpleC(target = 3, num = 1):
     t = 1
@@ -6,7 +6,7 @@ def findPrimitivePythagoreanTripleWithSimpleC(target = 3, num = 1):
     dic = {}
     res = []
     while True:
-        if (isPrime(s, t)):
+        if (gcd(s, t) == 1):
             ppt = [s*t, (s*s - t*t)//2, (s*s + t*t)//2, s, t]
             c = ppt[2]
             record = dic.get(c)

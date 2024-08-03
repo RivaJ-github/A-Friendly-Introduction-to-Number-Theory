@@ -1,0 +1,37 @@
+\chapter{像1，2，3一样简单}
+%
+\exercise a、b、c）略
+d）首先$A_1=B_1=1$，所以$B_1$整除$1!$成立。接着假设命题对$n$成立。则
+\begin{align*}
+\frac{A_{n+1}}{B_{n+1}}&=\frac{A_n}{B_n}+\frac{1}{n+1}\\
+&=\frac{(n+1)A_n+B_n}{(n+1)B_n}
+\end{align*}
+以上分式可能不是最简的，但是$B_{n+1}$一定整除$(n+1)B_n$，而归纳假设$B_n$整除$n!$，所以$B_{n+1}$整除$(n+1)n!=(n+1)!$。证毕。
+%
+\exercise $n=1$时，$F_1=1$，$F_3-1=2-1=1=F_1$。假设等式对于$n$成立，则
+\[F_1+F_2+\cdots+F_n+F_n+1=(F_{n+2}-1)+F_{n+1}=F_{n+3}-1\]
+即对于$n+1$也成立。证毕。
+%
+\exercise 当$n=6$时，$6!=720$，$\frac{6^6}{2^6}=729$，不等式成立。假设已知不等式对于某个$n\ge6$成立，则
+\[\frac{n!2^n}{n^n}\le 1\]
+则
+\begin{align*}
+\frac{(n+1)!2^{n+1}}{(n+1)^{n+1}}&=\frac{n!2^{n+1}}{(n+1)^n} \\
+&=2\cdot\frac{n!2^{n}}{(n+1)^n} \\
+&=2\cdot\frac{n!2^{n}}{n^n}\cdot\frac{n^n}{(n+1)^n} \\
+&\le 2\cdot\frac{n^n}{(n+1)^n} \\
+&=2\cdot \left(\frac{n}{n+1}\right)^n
+\end{align*}
+接着考察函数$f(x)=(1+1/x)^x$，由于$f'(x)=\ln xf(x)$，所以$f(x)$在$x>1$时单调递增。所以对任意$x\ge1$，$f(x)\ge f(1)=2$。这意味着
+\[\left(1+\frac{1}{n}\right)^n\ge 2\qquad \left(\frac{n}{n+1}\right)^n\le \frac{1}{2}\]
+所以
+\[\frac{(n+1)!2^{n+1}}{(n+1)^{n+1}}\le2\cdot \left(\frac{n}{n+1}\right)^n\le1\]
+即原命题对$n+1$也成立，证毕。
+%
+\exercise （题目写错了，应该是$F(x)=x^2-x+41$）\par
+a）$F(1),F(22),\cdots,F(40)$都是素数。\par
+b）但是$F(41)$就不是素数。更一般的结论是：一个（非常数）多项式不可能只取素数值。首先找到某个$n_0$使得$|f(n_0)\ge2$。令$D=f(n_0)$，则$f(n_0+kD)$一定被$D$整除。这是因为
+\[f(n_0+kD)\equiv f(n_0)=D\equiv0\pmod D\]
+由于$k\rightarrow \infty$时，$|f(n_0+kD)|\rightarrow \infty$，所以它不总是等于$D$。所以它有因子$D$，是个合数。
+%
+\exercise 归纳证明的错误出现在$n=2$时。
