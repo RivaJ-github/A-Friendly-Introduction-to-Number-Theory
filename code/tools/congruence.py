@@ -19,12 +19,3 @@ def linearCongruence(a, c, m):
     # 无解返回空列表
     return []
 
-'''
-    求欧拉函数phi(n)
-'''
-def phi(n):
-    factors = factoringPrimeFactors(n)
-    res = n
-    for [p, _] in factors:
-        res *= (p - 1) / p
-    return int(res)

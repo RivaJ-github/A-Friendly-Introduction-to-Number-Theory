@@ -2,6 +2,16 @@ import math
 import random
 
 '''
+    求欧拉函数phi(n)
+'''
+def phi(n):
+    factors = factoringPrimeFactors(n)
+    res = n
+    for [p, _] in factors:
+        res *= (p - 1) / p
+    return int(res)
+
+'''
 分解质因素：
 TODO: It's slow! Do it better!
 '''
@@ -222,3 +232,44 @@ def LiouvilleLambda(n):
     for [_, r] in fs:
         s = (s + r) % 2
     return 1 if s == 0 else -1
+
+def primitive_root(p):
+    '''
+    计算p的primitive root
+    '''
+    res = []
+    for a in range(1, p):
+        for r in range(1, p):
+            if (r == p - 1):
+                res.append(a)
+            elif (successive_square(a, r, p) == 1):
+                break
+    return res
+
+
+def primitive_root_m(m):
+    '''
+    计算任意整数m的原根
+    '''
+    phim = phi(m)
+    res = []
+    for a in range(1, m):
+        if (gcd(a, m) != 1):
+            continue
+        flag = True
+        for r in range(1, phim):
+            if (successive_square(a, r, m) == 1):
+                flag = False
+                break
+        if flag:
+            res.append(a)
+    return res
+
+def epa(p, a):
+    '''
+    计算使得$a^e=1(mod p)$的最小正整数e
+    '''
+    for e in range(1, p // 2 + 1):
+        if (successive_square(a, e, p) == 1):
+            return e
+    return p - 1

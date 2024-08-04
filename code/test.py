@@ -1,4 +1,4 @@
-from tools import LiouvilleLambda, isPrime, DesentProcedure_1, DesentProcedure_2, DesentProcedure, JacobiSymbol, RabinMillerTest, isCarmichael, successive_square, sigma, gcd, phi, factoringPrimeFactors
+from tools import primitive_root_m, epa, primitive_root, LiouvilleLambda, isPrime, DesentProcedure_1, DesentProcedure_2, DesentProcedure, JacobiSymbol, RabinMillerTest, isCarmichael, successive_square, sigma, gcd, phi, factoringPrimeFactors
 
 # for i in range(11, 21):
 #     print(i ** 1000 % 10000)
@@ -70,15 +70,8 @@ from tools import LiouvilleLambda, isPrime, DesentProcedure_1, DesentProcedure_2
 # print(b)
 
 # print(JacobiSymbol(37603, 48661))
-# print(JacobiSymbol(85, 101))
-# print(JacobiSymbol(29, 541))
-# print(JacobiSymbol(101, 1987))
-# print(JacobiSymbol(31706, 43789))
-# print(JacobiSymbol(299, 397))
-# print(JacobiSymbol(14, 137))
-# print(JacobiSymbol(55, 179))
 
-# primeList = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+primeList = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
 # # for p in range(5, 101, 2):
 # #     factors = factoringPrimeFactors(p)
 # #     if len(factors) == 1 and factors[0][1] == 1:
@@ -113,5 +106,39 @@ from tools import LiouvilleLambda, isPrime, DesentProcedure_1, DesentProcedure_2
 #         print(f'{n}, {f} is not prime')
 #         break
 
-for n in [30, 504, 60750]:
-    print(LiouvilleLambda(n))
+# for n in [30, 504, 60750]:
+#     print(LiouvilleLambda(n))
+
+# for (m, a) in [(9, 2), (15, 2), (16, 3), (10, 3)]:
+#     for i in range(1, m):
+#         if successive_square(a, i, m) == 1:
+#             print(i)
+#             break
+
+# for m in range(11, 21, 2):
+#     for i in range(1, m):
+#         if successive_square(2, i, m) == 1:
+#             print(f'e_{m}={i}')
+#             break
+
+# proots = primitive_root(13)
+# print(proots)
+# for r in range(2, 9):
+#     print([successive_square(p, r, 13) for p in proots])
+# res = []
+# for p in primeList:
+#     if 3 in primitive_root(p):
+#         res.append(p)
+# print(res)
+
+# for m in range(2, 51):
+#     if (len(primitive_root_m(m)) == 0):
+#         print(m)
+
+print(primitive_root_m(17))
+
+print(' & '.join([str(successive_square(3, i, 17)) for i in range(1, 17)]))
+
+for i in range(1, 17):
+    j = successive_square(3, i, 17)
+    print(' & '.join([str(1 if k == j else 0) for k in range(1, 17)]), end="\\\\\n")

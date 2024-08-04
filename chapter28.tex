@@ -1,0 +1,194 @@
+\chapter{幂模$p$与原根}
+$a$模$p$的次数（或阶）指（$a$与$p$互素）：
+\[e_p(a)=\text{（使得$a^e\equiv1\pmod p$的最小指数$e\ge1$）}\]
+\begin{theorem}[次数整除性质]
+设$a$是不被素数$p$整除的整数，假设$a^n\equiv 1\pmod p$，则次数$e_p(a)$整除$n$，特别地，次数$e_p(a)$总整除$p-1$。
+\end{theorem}
+\hbox{\vrule
+  \vbox{\hrule
+    \hbox {\hfil
+      \vbox spread 8pt{\vfil
+        具有最高次数$e_p(g)=p-1$的数$g$称为模$p$的原根。
+      \vfil}
+    \hfil}
+  \hrule}
+\vrule}
+\begin{theorem}[原根定理]
+每个素数$p$都有原根，更精确地，有恰好$\phi(p-1)$个原根。
+\end{theorem}
+\begin{conjecture}[阿廷猜想]
+有无穷多个素数$p$使得2是模$p$的原根。
+\end{conjecture}
+\begin{conjecture}[广义阿廷猜想]
+设整数$a$不是完全平方也不等于$-1$，则有无穷多个素数$p$使得$a$是模$p$的原根。
+\end{conjecture}
+%
+\exercise a）$1+2+3+\cdots+(p-1)=(p-1)p/2$，所以只要$p\not=2$，它模$p$余0。\par
+b）$1^2+2^2+3^2+\cdots+(p-1)^2=(p-1)p(2p-1)/6$，只要$p\not=2,3$，它模$p$余0。\par
+c）如果$k$被$p-1$整除，则有费马小定理，和式的每一项都为1，所以和式模$p$余$-1$。否则，设$g$是模$p$的原根。则
+\[1^k+2^k+3^k+\cdots+(p-1)^k\equiv g^k+g^{2k}+g^{3k}+g^{(p-1)k}\pmod p\]
+因为$1,g,g^2,\cdots,g^{p-1}$模$p$与$1,2,\cdots,p-1$是相同的（顺序可能不同）。于是
+\[1+g^k+g^{2k}+g^{3k}+g^{(p-2)k}\equiv\frac{1-g^{(p-1)k}}{1-g^k}\pmod p\]
+（注意，因为假设$k$不被$p-1$整除，所以$g^k\not\equiv1\pmod p$。）但$g^{p-1}\equiv1\pmod p$，所以和式模$p$余0。综上：
+\[1^k+2^k+3^k+\cdots+(p-1)^k\equiv 
+\begin{cases}
+0\pmod p & \text{如果$p-1$不整除$k$} \\
+-1\pmod p & \text{如果$p-1$整除$k$} 
+\end{cases}\]
+%
+\exercise a）(\romannumeral1)$e_9(2)=6$；(\romannumeral2)$e_9(2)=4$；(\romannumeral3)$e_9(2)=4$；(\romannumeral4)$e_9(2)=4$\par
+b）我们知道$2^{\phi(m)}\equiv1\pmod m$。我们还知道$2^{e_m}\equiv1\pmod m$。设$g=\gcd(e_m, \phi(m))$，并设$e_mu-\phi(m)v=g$。由此，我们可以计算：
+\begin{align*}
+2^{e_mu}&\equiv2^{\phi(m)v+g}\pmod m\\
+(2^{e_m})^u&\equiv(2^{\phi(m)})^v\cdot2^g\pmod m \\
+1^u&\equiv 1^v\cdot2^g\pmod m \\
+1&\equiv 2^g\pmod m
+\end{align*}
+但是$e_m$是满足$a^e\equiv1\pmod m$的最小指数，所以必须有$e_m\le g=\gcd(e_m,\phi(m))$。所以必须有$e_m=g$。而$g$整除$\phi(m)$，所以$e_m$整除$\phi(m)$。（虽然证明的是$a=2$的情况，但证明过程使用于任意$a$）
+%
+\exercise a）$e_{11}=10,\quad
+e_{13}=12,\quad
+e_{15}=4,\quad
+e_{17}=8,\quad
+e_{19}=18$\par
+b）对于$\gcd(m,n)=1$，$e_{mn}=e_me_n/\gcd(e_m,e_n)$\par
+c）表中$e_{103}=51$，$e_{109}=36$，$\gcd(e_{103},e_{109})=3$。于是$e_{11227}=51\cdot36/3=512$\par
+d）设$E=e_me_n/\gcd(e_m,e_n)$，我们需要证明$E$是满足$2^E\equiv1\pmod m$的最小值。首先，已知$2^{e_m}\equiv1\pmod m$，两边求$e_n/gcd(e_m,e_n)$次幂，得到$2^E\equiv1\pmod m$。同理可得$2^E\equiv1\pmod n$。换句话说，$2^E-1$同时被$m$和$n$整除。由于$m$，$n$互素，所以$2^E\equiv 1\pmod{mn}$。\par
+下面假设$K\ge1$满足$2^K\equiv1\pmod{mn}$。证明$K\ge E$，也就证明了$E$是最小的。由$2^K\equiv1\pmod{m}$，$2^K\equiv1\pmod{n}$，可知$e_m\mid K$，$e_n\mid K$。据此不难得到$e_me_n/gcd(e_m,e_n)\mid K$。证毕。\par
+e）从表格中观察，似乎$e_{p^k}=p^{k-1}e_p$。由此$e_{68921}=e_{41^3}=41^2e_{41}=41^2\cdot20=33620$。\par
+f）公式$e_{p^k}=p^{k-1}e_p$对于某些素数是错误的，如$p=1093,3511$。对于这两个素数，$e_{p^2}=e_p$，$e_{p^k}=p^{k-2}e_p$。已验证小于$4\cdot10^{12}$的素数中只有这两个素数有$e_{p^k}=p^{k-1}e_p$。
+% 
+\exercise 模13的原根为：$\{2,6,7,11\}$
+\begin{align*}
+\{a:e_{13}(a)=1\}&=\{1\}\\
+\{a:e_{13}(a)=2\}&=\{12\}\\
+\{a:e_{13}(a)=3\}&=\{3,9\}\\
+\{a:e_{13}(a)=4\}&=\{5,8\}\\
+\{a:e_{13}(a)=6\}&=\{4,10\}\\
+\{a:e_{13}(a)=12\}&=\{2,6,7,11\}\\
+\end{align*}
+%
+\exercise a）只有$g^5$和$g^7$是模37的原根。\par
+b）$g^k$是模$p$的原根，当且仅当$\gcd(k, p-1)=1$。\par
+\proof 必要性：设$G=\gcd(k, p-1)$，如果$G>1$，则$(g^k)^{(p-1)/G}=(g^{p-1})^{k/G}\equiv1^{k/G}\equiv1\pmod p$。所以$g^k$不是模$p$的原根，因为它的$((p-1)/G)$次方模$p$余1。\par
+充分性：接着假设$(g^k)^n\equiv1\pmod p$，且$G=1$。这意味着$ku-(p-1)v=1$有整数解。于是$g^{ku}=(g^{p-1})^vg\equiv g\pmod p$。两边做$n$次方，得$1\equiv g^{kun}\equiv g^n\pmod p$，所以$p-1$整除$n$。这意味着使得$(g^k)^n$模$p$余1的最小指数是$p-1$，即$g^k$是模$p$的原根。证毕。\par
+c）$p-1=21168=2^4\cdot3^3\cdot7^2$。所以$k$只需不被3或5或7整除。所以$g^5,g^{11},g^{13},g^{17},g^{19}$是模21169的原根。
+%
+\exercise 100以内有原根3的素数有：5, 7, 17, 19, 29, 31, 43, 53, 79, 89
+%
+\exercise （请去掉题目中的$a=p^2$中的$=p^2$。）\par
+记$a=b^2$，则
+\[a^{(p-1)/2}=(b^2)^{(p-1)/2}=b^{p-1}\equiv1\pmod p\]
+所以$e_p(a)\le(p-1)/2$，于是$a$不可能是模$p$的原根。
+%
+\exercise a）\[g, g^2,g^3,\cdots, g^{p-2}, g^{p-1}\]
+给出了所有模$p$的非零值。由$(g^k)^2=g^{2k}$，所以偶数次方肯定是二次剩余。假设某个奇数次方也是二次剩余，则$g^{2k+1}\equiv c^2\pmod p$，两边做$(p-1)/2$次方得到
+\[1\equiv c^{p-1}\equiv (c^2)^{(p-1)/2}\equiv g^{(2k+1)(p-1)/2}\equiv g^{k(p-1)}g^{(p-1)/2}\equiv g^{(p-1)/2}\pmod p\]
+这与$g$是原根矛盾。\par
+b）由a）可知$(\frac{g^n}{p}=(-1)^n)$，所以
+\[\left(\frac{g^n}{p}\right)\left(\frac{g^m}{p}\right)=(-1)^n\cdot(-1^m)=(-1)^{n+m}=\left(\frac{g^{n+m}}{p}\right)\left(\frac{g^ng^m}{p}\right)\]
+c）总能选择$n$，使得$a\equiv g^n\pmod p$，则：
+\begin{align*}
+\left(\frac{a}{p}\right)=1&\Longleftrightarrow n\text{是偶数，不妨记为}n=2k \\
+&\Longrightarrow a^{(p-1)/2}\equiv g^{2k(p-1)/2}\equiv(g^{p-1})^k\equiv 1\pmod p
+\end{align*}
+类似地，
+\begin{align*}
+\left(\frac{a}{p}\right)=-1&\Longleftrightarrow n\text{是奇数，不妨记为}n=2k+1 \\
+&\Longrightarrow a^{(p-1)/2}\equiv g^{(2k+1)(p-1)/2}\equiv(g^{p-1})^kg^{(p-1)/2}\equiv g^{(p-1)/2}\pmod p
+\end{align*}
+我们知道$g^{(p-1)/2}$的平方模$p$余1，所以$g^{(p-1)/2}$与1或$-1$同余，但是$g$是原根，所以它不能同余1，只能同余$-1$。
+%
+\exercise $e_p(2)$整除$p-1$。而$p-1=2q$，所以$e_p(2)$是1或2或$q$或$2q$。又$2^{e_p(2)}\equiv1\pmod p$，所以$e_p(2)$不是1或2（因为$p=2q+1$且$q$至少为5，所以$p$至少为11）。所以$e_p(2)$是$q$或$2q$。首先观察$2^q\pmod p$，由于$q=(p-1)/2$，所以根据欧拉准则$2^q\equiv(\frac{2}{p})\pmod p$。另一方面，由于$p=2q+1$且$q\equiv1\pmod4$，所以$p\equiv3\pmod8$。由二次互反律，$\left(\frac{2}{p}\right)=-1$，所以$2^q\equiv-1\pmod p$。所以$e_p(2)\not=q$，所以仅剩的可能性是$e_p(2)=2q=p-1$。所以2是模$p$的原根。
+%
+\exercise 设$g$是模$p$的原根，并设$b\equiv g^u\pmod p$。则$b$的$k$次根（假设存在）$g^v\pmod p$满足$vk\equiv u\pmod{p-1}$。假设这个同余式有解，我们知道它有$\gcd(k, p-1)$个解，所以$b$有$\gcd(k, p-1)$个模$p$的$k$次根。
+%
+\exercise 
+\begin{lstlisting}
+def epa(p, a):
+    '''
+    计算使得$a^e=1(mod p)$的最小正整数e
+    '''
+    for e in range(1, p // 2 + 1):
+        if (successive_square(a, e, p) == 1):
+            return e
+    return p - 1
+\end{lstlisting}
+%
+\exercise 下面的程序给出$p$的所有原根：
+\begin{lstlisting}
+def primitive_root(p):
+    '''
+    计算p的primitive root
+    '''
+    res = []
+    for a in range(1, p):
+        for r in range(1, p):
+            if (r == p - 1):
+                res.append(a)
+            elif (successive_square(a, r, p) == 1):
+                break
+    return res
+\end{lstlisting}
+%
+\exercise $e_{mn}(a)=e_m(a)e_n(a)/\gcd(e_m(a),e_n(a))=\mathrm{LCM}(e_m(a),e_n(a))$（证明过程见练习28.3）
+%
+\exercise a）8，12，15，16，20，21，24，28，30，32，33，35，36，39，40，42，44，45，48没有原根。\par
+b）$m$有原根，当且仅当$m=p^k$或$m=2p^k$，其中$p$是任意奇素数。\par
+c）\proof 必要性：假设$m$没有以上形式，则$m$可被分解为
+\[m=m_1m_2,\text{其中}\gcd(m_1,m_2)=1\text{且}m_1,m_2\ge3\]
+假设$g$是$m$的原根。则$e_m(g)=\phi(m)=\phi(m_1)\phi(m_2)$。但前面的练习告诉我们
+\[e_m(g)=e_{m_1}(g)e_{m_2}(g)/\gcd(e_{m_1}(g),e_{m_2}(g))\]
+其中$e_{m_1}(g)\le\phi(m_1)$，$e_{m_2}(g)\le\phi(m_2)$。所以要使$e_m(g)=\phi(m)$必须有$e_{m_1}=\phi(m_1)$，$e_{m_2}=\phi(m_2)$且$\gcd(\phi(m_1),\phi(m_2))=1$。但由于$m_1,m_2\ge3$，所以$\phi(m_1)$，$\phi(m_2)$都是偶数，他们不互素。所以如果$m$不具有形式$p^k$或$2p^k$，则$m$没有原根。\par
+充分性：设$m=p^k$，$g$是模$p$的原根。则总可以构造$g+ap$为模$p^2$的原根。在加上一个二次项成为$p^3$的原根，以此类推，可以构造任意的$p^k$的原根。至于$2p^k$，由于$\phi(p^k)=\phi(2p^k)$，所以$p^k$的原根也是$2p^k$的原根。
+%
+\exercise a）有$N!$个$N\times N$的转置矩阵\par
+b）$A^6$是个单位矩阵。\par
+c）考虑任意向量$e=[e_1, e_2, e_3,\cdots, e_N]^T$，$Ae$的结果是$[e_i]$的另一个排列。而最多只有$N!$种排列，所以$A^{N!}$总是单位矩阵。更进一步，假设$n_j$是使得$A^{n_j}e$的第$j$个元素回到初始位置的最小次数。则$A^{\mathrm{LCM}(n_1,n_i,\cdots,n_N)}$是单位矩阵。\par
+d）我们需要构造两个循环，如：
+\[A=\begin{bmatrix}
+0 & 1 & 0 & 0 & 0 \\
+1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 1 \\
+0 & 0 & 1 & 0 & 0 
+\end{bmatrix}\]
+矩阵$A$会交换$e_1,e_2$，需要两步回到原位（$n_1=n_2=2$），同时交换$e_3,e_4,e_5$，需要三步回到原位（$n_3=n_4=n_5=3$）。因此需要$A^6$将所有向量回归原位。
+%
+\exercise a）
+\[\begin{bmatrix}
+1 & 0 & 0 \\ 
+0 & 0 & 1 \\  
+0 & 1 & 0 
+\end{bmatrix}\quad
+\begin{bmatrix}
+0 & 1 & 0 \\ 
+1 & 0 & 0 \\  
+0 & 0 & 1 
+\end{bmatrix}\quad
+\begin{bmatrix}
+0 & 1 & 0 \\ 
+0 & 0 & 1 \\ 
+1 & 0 & 0  
+\end{bmatrix}\quad
+\begin{bmatrix}
+0 & 0 & 1 \\ 
+1 & 0 & 0 \\ 
+0 & 1 & 0  
+\end{bmatrix}\]
+b、c、d）略
+%
+\exercise 3是17的原根，建表如下：
+\begin{center}
+\begin{tabular}{c*{16}{|c}}
+\hline
+第$i$行 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 \\
+\hline
+第$i$列 & 3 & 9 & 10 & 13 & 5 & 15 & 11 & 16 & 14 & 8 & 7 & 4 & 12 & 2 & 6 & 1 \\
+\hline
+\end{tabular}
+\end{center}
+%
+\exercise a）提示：$g_1^i$是$[1,p-2]\rightarrow[2,p-1]$的一个双射，$g_2^j$也是。\par
+b）略，类似正文的Welch构造的证明过程。\par
+c）略。
