@@ -51,11 +51,11 @@ def minCongruence(a, b):
         raise Exception('b must be a positive integer')
     return a - math.floor(a / b) * b 
 
-'''
-解ax+by=gcd(a,b)
-返回(g, x, y)
-'''
 def gcdWithXY(a, b):
+    '''
+    解ax+by=gcd(a,b)
+    返回(g, x, y)
+    '''
     if (b == 0):
         return (a, 1, 0)
     x, g, v, w = 1, a, 0, b
@@ -273,3 +273,12 @@ def epa(p, a):
         if (successive_square(a, e, p) == 1):
             return e
     return p - 1
+
+def indexI(p, g):
+    '''
+    给定素数p，原根g，返回指标表I
+    '''
+    I = [None] * p
+    for a in range(1, p):
+        I[successive_square(g, a, p)] = a
+    return I

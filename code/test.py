@@ -1,4 +1,4 @@
-from tools import primitive_root_m, epa, primitive_root, LiouvilleLambda, isPrime, DesentProcedure_1, DesentProcedure_2, DesentProcedure, JacobiSymbol, RabinMillerTest, isCarmichael, successive_square, sigma, gcd, phi, factoringPrimeFactors
+from tools import gcdWithXY, indexI, primitive_root_m, epa, primitive_root, LiouvilleLambda, isPrime, DesentProcedure_1, DesentProcedure_2, DesentProcedure, JacobiSymbol, RabinMillerTest, isCarmichael, successive_square, sigma, gcd, phi, factoringPrimeFactors
 
 # for i in range(11, 21):
 #     print(i ** 1000 % 10000)
@@ -135,10 +135,32 @@ primeList = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61,
 #     if (len(primitive_root_m(m)) == 0):
 #         print(m)
 
-print(primitive_root_m(17))
+# print(primitive_root_m(17))
 
-print(' & '.join([str(successive_square(3, i, 17)) for i in range(1, 17)]))
+# print(' & '.join([str(successive_square(3, i, 17)) for i in range(1, 17)]))
 
-for i in range(1, 17):
-    j = successive_square(3, i, 17)
-    print(' & '.join([str(1 if k == j else 0) for k in range(1, 17)]), end="\\\\\n")
+# for i in range(1, 17):
+#     j = successive_square(3, i, 17)
+#     print(' & '.join([str(1 if k == j else 0) for k in range(1, 17)]), end="\\\\\n")
+
+# print(' & '.join([str(a) for a in range(1, 47)]))
+# print(' & '.join([str(I) for I in indexI(47, 5)]))
+# print(indexI(37, 2))
+
+
+p = 380803
+g = 2
+k = 278374
+
+r = 198374
+a = successive_square(g, k, p)
+e1 = successive_square(g, r, p)
+e2 = successive_square(a, r, p) * 302526 % p
+print(e1, e2)
+
+
+for (e1, e2) in [(61745, 206881), (255836, 314674),(108147, 350768)]:
+    c = successive_square(e1,k, p)
+    (_, u, _) = gcdWithXY(c, p)
+    v = u * e2 % p
+    print(v)

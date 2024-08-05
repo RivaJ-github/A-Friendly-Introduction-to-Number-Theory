@@ -1,0 +1,65 @@
+\chapter{原根与指标}
+\begin{theorem}[指标法则]
+指标满足下述法则：
+\begin{enumerate}
+\item $I(ab)\equiv I(a) + I(b)\pmod{p-1}$【乘积法则】
+\item $I(a^k)\equiv kI(a)\pmod{p-1}$【幂法则】
+\end{enumerate}
+\end{theorem}
+%
+\exercise a）$I(x)\equiv I(23)-I(12)\equiv15-28\equiv23\pmod{36}$，所以$x\equiv5\pmod{37}$\par
+b）$23I(x)\equiv I(18)-I(5)\equiv 17-23\equiv30\pmod{36}$，由于$\gcd(23, 26)=1$，所以只有一个解，$I(x)\equiv6\pmod{36}$，于是$x\equiv27\pmod{37}$\par
+c）$12I(x)\equiv I(11)\equiv30\pmod{36}$。因为$\gcd(12,36)=12\nmid 30$，所以无解。\par
+d）$20I(x)=I(34)-I(7)\equiv8-32\equiv12\pmod{36}$。因为$\gcd(20,36)=4\mid 12$，所以有4个解。$I(x)\equiv6,15,24,33\pmod{36}$，对应$x\equiv27,23,10,14\pmod{37}$。
+%
+\exercise a）
+\begin{center}
+\begin{tabular}{c|*{16}{c}}
+$a$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 \\
+\hline
+$I(a)$ & 16 & 14 & 1 & 12 & 5 & 15 & 11 & 10 & 2 & 3 & 7 & 13 & 4 & 9 & 6 & 8 \\
+\end{tabular}
+\end{center}
+b）$I(x)\equiv I(11)-I(4)\equiv7-12\equiv11\pmod{16}$。因此$x\equiv7\pmod{17}$。\par
+c）$6I(x)\equiv I(7)-I(5)\equiv11-5\equiv6\pmod{16}$。$\gcd(6,16)=2\mid 6$，所以有两个解。$I(x)=1,9\pmod{16}$，对应$x\equiv3,14\pmod{17}$
+% 
+\exercise a）由指标乘积法则，$I(ab)=I(a)+I(b)\pmod{p-1}$。又$I(ab)=I(1)=p-1\equiv0\pmod{p-1}$，所以$I(a)\equiv-I(b)\pmod{p-1}$。由于$1\le I(a),I(b)\le p-1$，所以$I(a)+I(b)=p-1$或$I(a)=I(b)=p-1$。\par
+b）$I(a)=I(-b)=I(-1)+I(b)$。由于$(-1)^2=1$，$2I(-1)\equiv0\pmod{p-1}$，所以$I(-1)=\frac{p-1}{2}$。所以$I(a)\equiv I(b)+\frac{p-1}{2}\pmod{p-1}$\par
+c）$I(a)$和$I(1-a)$不存在简单的关系。
+%
+\exercise a、b）$x^k\equiv a\pmod p$有解，当且仅当$\gcd(k,p-1)$整除$I(a)$。如果有解，则恰有$\gcd(k,p-1)$个解。对于$a=1$的情况，$I(a)=I(1)=p-1$，$\gcd(k, p-1)=k\mid I(a)$，所以恰有$k$个解。\par
+c）由于$729=3^6$，所以$I(729)=6$（使用原根$g=3$计算指标）。由$\gcd(111,1986)=3\mid I(27)$，所以同余式$x^{111}\equiv27\pmod{1987}$有3个解。
+%
+\exercise \begin{lstlisting}
+def indexI(p, g):
+  '''
+  给定素数p，原根g，返回指标表I
+  '''
+  I = [None] * p
+  for a in range(1, p):
+      I[successive_square(g, a, p)] = a
+  return I
+\end{lstlisting}
+\begin{center}
+\begin{tabular}{c|*{46}c}
+$a$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 \\
+$I(a)$ & 46 & 18 & 20 & 36 & 1 & 38 & 32 & 8 & 40 & 19 & 7 & 10 & 11 & 4 & 21 & 26 \\
+\hline
+$a$ & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28 & 29 & 30 & 31 & 32 \\
+$I(a)$ & 16 & 12 & 45 & 37 & 6 & 25 & 5 & 28 & 2 & 29 & 14 & 22 & 35 & 39 & 3 & 44\\
+\hline
+$a$ & 33 & 34 & 35 & 36 & 37 & 38 & 39 & 40 & 41 & 42 & 43 & 44 & 45 & 46 \\
+$I(a)$ & 27 & 34 & 33 & 30 & 42 & 17 & 31 & 9 & 15 & 24 & 13 & 43 & 41 & 23 \\
+\end{tabular}
+\end{center}
+%
+\exercise a）
+\[e_2\cdot (e_1^k)^{-1}
+\equiv ma^r\cdot(g^{rk})^{-1}
+\equiv ma^r\cdot(a^{r})^{-1}
+\equiv m\pmod p\]
+b）$a,g,p$是已知的公钥，只要能解$g^k\equiv a\pmod p$，就得到了Alice的私钥。
+%
+\exercise a）$e_1\equiv g^r\equiv 3^{129381}\equiv119537\pmod{163841}$，$e_2\equiv ma^r=39828\cdot 22695^{129381}\equiv133768\pmod{163841}$，所以发送的信息是$(119537,133768)$\par
+b）选择不同的$r$，密码电文将是不同的。\par
+c）解码得到302526，291513，281530。翻译成明文是：“TOP SECRET”
