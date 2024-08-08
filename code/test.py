@@ -166,7 +166,12 @@ primeList = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61,
 #     v = u * e2 % p
 #     print(v)
 
-x0, y0 = 9, 4
-for i in range(1, 6):
-    x0, y0 = 9*x0+20*y0, 4*x0 + 9*y0
-    print(f'({x0}, {y0}),', end='')
+# x0, y0 = 9, 4
+# for i in range(1, 6):
+#     x0, y0 = 9*x0+20*y0, 4*x0 + 9*y0
+#     print(f'({x0}, {y0}),', end='')
+
+x0, y0, x1, y1 = 5, 3, 3, 2
+for i in range(1, 10):
+    x0, y0 = x0 * x1 + 2 * y0 * y1, x0 * y1 + y0 * x1
+    print(f'({x0}, {y0}),', end='\\quad ')
