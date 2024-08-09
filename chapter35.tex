@@ -1,0 +1,91 @@
+\chapter{数论与虚数}
+\begin{theorem}[代数学基本定理]
+如果$a_0$，$a_1$，$a_2$，$\cdots$，$a_d$都是复数且$a_0\not=0$，$d\ge1$，则方程
+\[a_0x^{d}+a_1x^{d-1}+a_2x^{d-2}+\cdots+a_{d-1}x + a_d=0\]
+有复数解。
+\end{theorem}
+\begin{theorem}[高斯单位定理]
+高斯整数仅有的单位是1，$-1$，$i$，$-i$，即1，$-1$，$i$，$-i$是仅有的四个具有高斯整数乘法逆元的高斯整数。
+\end{theorem}
+高斯整数$\alpha$成为\emph{高斯素数}，指能整除$\alpha$的高斯整数只有以下8个数：
+\[1,-1,i,-i,\alpha,-\alpha,i\alpha,-i\alpha\]
+即整除$\alpha$的只有单位与单位的$\alpha$倍。\par
+$x+yi$的范数定义为
+\[N(x+yi)=x^2+y^2\]
+\begin{theorem}[范数的积性]
+设$\alpha$，$\beta$是任意的复数，则
+\[N(\alpha\beta)=N(\alpha)N(\beta)\]
+\end{theorem}
+\begin{theorem}[高斯素数定理]
+高斯素数可以描述如下：
+\begin{enumerate}
+\renewcommand{\labelenumi}{(\roman{enumi})}
+\item $1+i$为高斯素数；
+\item 设$p$是普通素数，且$p\equiv3\pmod4$，则$p$是高斯素数。
+\item 设$p$是普通素数，且$p\equiv1\pmod4$，将$p$表成两平方数之和$p=u^2+v^2$，则$u+vi$是高斯素数。
+\end{enumerate}
+每个高斯素数等于一个单位（$\pm1$或$\pm i$）乘以形式（\romannumeral1）、（\romannumeral2）、（\romannumeral3）中的一个高斯素数。
+\end{theorem}
+\begin{lemma}[高斯整除性引理]
+设$\alpha=a+bi$为高斯整数。
+\begin{enumerate}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\item 如果2整除$N(\alpha)$，则$1+i$整除$\alpha$；
+\item 设$\pi=p$为类别（\romannumeral2）的素数，并假设$p$作为普通整数整除$N(\alpha)$，则$\pi$作为高斯整数整除$\alpha$。
+\item 设$\pi=u+vi$为类别（\romannumeral3）中的高斯素数，且$\overline\pi=u-vi$。假定$N(\pi)=p$作为普通整数整除$N(\alpha)$，则$\pi$和$\overline\pi$中至少有一个作为高斯整数整除$\alpha$。
+\end{enumerate}
+\end{lemma}
+%
+\exercise 略
+%
+\exercise 略
+%
+\exercise a）$11+10i$；b）$-\frac{5}{17}-\frac{14}{17}i$；c）$i$
+%
+\exercise a）令$x=u+vi$，则$x^2=(u+vi)^2=(u^2-v^2)+2uvi=95-168i$，于是$u^2-v^2=95, uv=-84$，解得$u=12, v=-7$，于是$x=12-7i$\par
+b）类似地，令$x=u+vi$，则$x^2=(u+vi)^2=(u^2-v^2)+2uvi=1+2i$，于是$u^2-v^2=1, uv=1$，将$u=1/v$代入前式得$u^4-u^2-1=0$，解得$u^2=(1\pm\sqrt5)/2$，因为$u$是实数，所以舍去负数解。最终得到$v^2=u^2-1=(-1+\sqrt5)/2$，同样舍去负数解。最终得到$1+2i$的两个平方根：
+\[\pm\left(\sqrt{\frac{1+\sqrt5}{2}} + \sqrt{\frac{-1+\sqrt5}{2}}i\right)\]
+%
+\exercise a）不能，$\alpha/\beta=(11-8i)/(3+5i)=(11-8i)(3-5i)/34=(-7+79i)/34$\par
+b）能，$\alpha/\beta=(4+7i)/(2-3i)=(4+7i)(2+3i)/13=(-13+26i)/65=-1+2i$\par
+c）不能，$\alpha/\beta=(3-5i)/(3-39i)=(3-5i)(3+39i)/1530=(204-102i)/1530$\par
+d）能，$\alpha/\beta=(3-39i)/(3-5i)=(3-39i)(3+5i)/34=(204-102i)/34=6-3i$
+%
+\exercise a）\proof $a+bi$整除$c+di$当且仅当商
+\[\frac{c+di}{a+bi}=\frac{(ac+bd) + (ad-bc)i}{a^2+b^2}\]
+是高斯整数，而这当且仅当$ac+bd$以及$ab-bc$被$a^2+b^2$整除。\par
+b）\proof 记$\alpha=a+bi$，$\beta=c+di$，假设$\alpha$整除$\beta$，可设$\beta=\alpha\gamma$，其中$\gamma$是高斯整数。根据范数积性，$N(\beta)=N(\alpha\gamma)=N(\alpha)N(\gamma)$，所以$N(\alpha)$整除$N(\beta)$，即$a^2+b^2$整除$c^2+d^2$。
+%
+\exercise 基本运算，略。
+%
+\exercise a）如果$\alpha=a+bi\sqrt2$是一个单位，则存在$\beta\in R_1$使得$\alpha\beta=1$。两边取范数可得$N(\alpha)N(\beta)=1$，由$N(\alpha)=a^2+2b^2$是整数且非负，可知$N(\alpha)=1$，于是唯一的可能性是$a^2=1$且$b^2=0$。因此$R_1$的单位只有$\pm1$。\par
+b）设$\alpha=a+b\rho$，计算范数
+\begin{align*}
+N(\alpha)&=(a+b\rho)(a+b\bar\rho) \\
+&=a^2+b^2\rho\bar\rho + ab(\rho+\bar\rho) \\
+&=a^2+b^2-ab
+\end{align*}
+与a）相同，假设$\alpha$是单位，则$a^2-ab+b^2=1$，两边乘4并配方：
+\[(2a-b)^2+3b^2=4\]
+显然$b^2\le1$。如果$b=0$，则$a=\pm1$。如果$b=1$，则$2a-b=2a-1=\pm1$，所以$a=0$或$1$。最后，如果$b=-1$，则$2a-b=2a+1=\pm1$，得到$a=0$或$-1$。综上，$R_2$的单位有六个：$\pm1$，$\pm\rho$，$\pm(1+\rho)$。换种方式描述是$\{1,\rho,\rho^2,\rho^3,\rho^4,\rho^5\}$。\par
+c）$R_3$的单位是$a/d$，其中$p\nmid a$且$p\nmid b$
+%
+\exercise a）\proof 设$\alpha=a+b\sqrt3$，$\beta=c+d\sqrt3$，则$\alpha\beta=(a+b\sqrt3)(c+d\sqrt3)=(ac+3bd)+(ad+bc)\sqrt3$，于是
+\begin{align*}
+N(\alpha\beta)&=(ac+3bd)^2-3(ad+bc)^2 \\
+&=a^2c^2+9b^2d^2-3a^2d^2-3b^2c^2 \\
+&=(a^2-3b^2)(c^2-3d^2) \\
+&=N(\alpha)N(\beta)
+\end{align*}
+证毕。\par
+b）\proof 如果$\alpha$是单位，则存在$\beta$使得$N(\alpha)N(\beta)=1$，由于$N(\alpha)=a^2-3b^2$是整数，所以$N(\alpha)=\pm1$。假设$N(\alpha)=a^2-3b^2=-1$，两边模3可得$a^2\equiv-1\pmod3$，但由二次互反律，上式无解，所以$N(\alpha)=1$，证毕。\par
+c）已知$N(\alpha)=a^2-3b^2=1$，存在$\beta=a-b\sqrt3$，使得$\alpha\beta=(a+b\sqrt3)(a-b\sqrt3)=a^2-3b^2=1$，所以$\alpha$是$R$的单位。\par
+d，e）即求方程$a^2-3b^2=1$的解。由最小的正整数解是$(2,1)$，记$u+v\sqrt3=(2+\sqrt3)^k$，其中$k$可以是任意整数，则$\pm u\pm v\sqrt3$是$R$的单位。
+%
+\exercise 略
+%
+\exercise a）首先分解范数$N(91+63i)=12250=2\cdot5^3\cdot7^2$。根据引理，$1+i$和7整除$91+63i$，所以我们计算$(91+63i)/7=13+9i$，$(13+9i)/(1+i)=11-2i$。接着由于$5=2^2+1^2$，由引理可知它被$2+i$或$2-i$整除。由于$(11-2i)/(2-i)=(24+7i)/5$，所以正确的是$2+i$，计算$(11-2i)/(2-i)=4-3i$。由$N(4-3i)=25=5^2$，所以还能被$2+i$或$2-i$整除，$(4-3i)/(2-i)=1-2i$，而$1-2i$是和$2+i$相同高斯素数，$-i(2+i)=1-2i$。综上得到最终分解
+\[91+63i=-i\cdot(1+i)\cdot(2+i)^3\cdot7\]
+b）$975=3\cdot5^2\cdot13$。3是高斯素数，5和13很容易分解为高斯素数：$5=(2+i)(2-i)$，$13=(3+2i)(3-2i)$。于是$975=3\cdot(2+i)^2\cdot(2-i)^2\cdot(3+2i)^2\cdot(3-2i)^2$\par
+c）$N(53+62i)=6653$是普通素数，所以$53+62i$是(\romannumeral3)类高斯素数
+
